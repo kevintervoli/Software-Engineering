@@ -1,16 +1,10 @@
-# mobile_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This is the repository for the Software Engineering project
+Group Members :
+1- Kevin Tervoli
+2- Daniel Avdiu
+3- Blerim Brahja
+4- Daniel Figu
+5- Eljo Muzhaka 
+6- Vasian Demika
+7- Xhenis Osmani
+8- Marin Hoxha
