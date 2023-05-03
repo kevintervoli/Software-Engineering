@@ -1,0 +1,114 @@
+CREATE TABLE Area
+(
+  Area_Id INT NOT NULL,
+  No_Properties INT NOT NULL,
+  Location varchar(255) NOT NULL,
+  PRIMARY KEY (Area_Id)
+);
+
+CREATE TABLE Admin
+(
+  ID INT NOT NULL,
+  Name varchar(255) NOT NULL,
+  Surname varchar(255) NOT NULL,
+  Username varchar(255) NOT NULL,
+  Password varchar(255) NOT NULL,
+  Email varchar(255) NOT NULL,
+  Address varchar(255) NOT NULL,
+  Gender varchar(255) NOT NULL,
+  Age INT NOT NULL,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE Auction
+(
+  Auction_ID INT NOT NULL,
+  Auction_Date date NOT NULL,
+  Auction_Venue varchar(255) NOT NULL,
+  Auction_InitialPrice INT NOT NULL,
+  Auctioneer varchar(255) NOT NULL,
+  PRIMARY KEY (Auction_ID)
+);
+
+CREATE TABLE User
+(
+  Name varchar(255) NOT NULL,
+  Age INT NOT NULL,
+  Email varchar(255) NOT NULL,
+  Address varchar(255) NOT NULL,
+  username varchar(255) NOT NULL,
+  Password varchar(255) NOT NULL,
+  Status INT NOT NULL,
+  ID INT NOT NULL,
+  Credit_Score INT NOT NULL,
+  PRIMARY KEY (ID),
+);
+
+CREATE TABLE Agent
+(
+  Agent_ID INT NOT NULL,
+  Salary INT NOT NULL,
+  Name varchar(255) NOT NULL,
+  Surname varchar(255) NOT NULL,
+  Username varchar(255) NOT NULL,
+  Password varchar(255) NOT NULL,
+  Email varchar(255) NOT NULL,
+  Address varchar(255) NOT NULL,
+  Gender varchar(255) NOT NULL,
+  Age INT NOT NULL,
+  ID INT NOT NULL,
+  Auction_ID INT,
+  PRIMARY KEY (Agent_ID),
+  FOREIGN KEY (Auction_ID) REFERENCES Auction(Auction_ID)
+);
+
+CREATE TABLE Property
+(
+  Property_Id INT NOT NULL,
+  Property_Name varchar(255) NOT NULL,
+  Description varchar(255) NOT NULL,
+  Nr_Bedrooms INT NOT NULL,
+  Nr_Bathrooms INT NOT NULL,
+  Area varchar(255) NOT NULL,
+  Image blob NOT NULL,
+  Price INT NOT NULL,
+  No_Garages INT NOT NULL,
+  Stories INT NOT NULL,
+  Status INT NOT NULL,
+  Agent_ID INT NOT NULL,
+  Area_Id INT NOT NULL,
+  ID INT,
+  Auction_ID INT,
+  PRIMARY KEY (Property_Id),
+  FOREIGN KEY (Agent_ID) REFERENCES Agent(Agent_ID),
+  FOREIGN KEY (Area_Id) REFERENCES Area(Area_Id),
+  FOREIGN KEY (Auction_ID) REFERENCES Auction(Auction_ID)
+);
+
+CREATE TABLE Agent_Area
+(
+  RelationID INT NOT NULL,
+  Agent_ID INT NOT NULL,
+  Area_Id INT NOT NULL,
+  FOREIGN KEY (Agent_ID) REFERENCES Agent(Agent_ID),
+  FOREIGN KEY (Area_Id) REFERENCES Area(Area_Id)
+);
+
+CREATE TABLE Appointment
+(
+  Date date NOT NULL,
+  Venue varchar(255) NOT NULL,
+  ID INT NOT NULL,
+  Agent_ID INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (Agent_ID) REFERENCES Agent(Agent_ID),
+ 
+);
+
+CREATE TABLE Participants
+(
+  ID INT NOT NULL,
+  Auction_ID INT NOT NULL,
+  PRIMARY KEY (ID, Auction_ID),
+  FOREIGN KEY (Auction_ID) REFERENCES Auction(Auction_ID)
+);
