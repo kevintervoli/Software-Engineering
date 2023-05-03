@@ -85,7 +85,7 @@ public class JwtService {
     }
 
     public ResponseWrapper<AuthenticationResponse> decodeToken(String jwt){
-        System.err.println(jwt);
+        System.err.println("jwt: " + jwt);
 
         String[] parts = jwt.split("\\.");
         String encodedHeader = parts[0];

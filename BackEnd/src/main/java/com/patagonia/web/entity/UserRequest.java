@@ -1,30 +1,32 @@
 package com.patagonia.web.entity;
 
-
-
 public class UserRequest {
 
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private int age;
     private String email;
-    private String phone;
+    private String address;
     private String username;
     private String password;
+    private int status;
+    private int creditScore;
     private Long roleId;
     private boolean enabled;
 
     public UserRequest() {
     }
-    public UserRequest(Long id, String firstName, String lastName, String email, String phone, String username, String password, Long roleId, boolean enabled) {
-        super();
+
+    public UserRequest(Long id, String name, int age, String email, String address, String username, String password, int status, int creditScore, Long roleId, boolean enabled) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.age = age;
         this.email = email;
-        this.phone = phone;
+        this.address = address;
         this.username = username;
         this.password = password;
+        this.status = status;
+        this.creditScore = creditScore;
         this.roleId = roleId;
         this.enabled = enabled;
     }
@@ -36,20 +38,21 @@ public class UserRequest {
     public void setId(Long id) {
         this.id = id;
     }
-    public String getFirstName() {
-        return firstName;
+
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getAge() {
+        return age;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getEmail() {
@@ -60,12 +63,12 @@ public class UserRequest {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getUsername() {
@@ -84,6 +87,22 @@ public class UserRequest {
         this.password = password;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getCreditScore() {
+        return creditScore;
+    }
+
+    public void setCreditScore(int creditScore) {
+        this.creditScore = creditScore;
+    }
+
     public Long getRoleId() {
         return roleId;
     }
@@ -96,22 +115,23 @@ public class UserRequest {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setIsEnable(boolean isEnable) {
+        this.enabled = isEnable;
     }
 
     @Override
     public String toString() {
-        return "RegisterRequest{" +
-                "id=" + id + '\'' +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+        return "UserRequest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
                 ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", status=" + status +
+                ", creditScore=" + creditScore +
                 ", roleId=" + roleId +
-                ", enabled=" + enabled +
                 '}';
     }
 }

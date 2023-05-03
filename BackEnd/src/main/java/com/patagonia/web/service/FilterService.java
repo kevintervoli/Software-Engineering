@@ -69,16 +69,31 @@ public class FilterService {
     public ResponseWrapper<UserResponse> getUserById(Long id) {
         logUtil.info("Fetching user with ID: " + id);
         try {
+
+            /*
+                    this.name = name;
+        this.age = age;
+        this.email = email;
+        this.address = address;
+        this.username = username;
+        this.password = password;
+        this.status = status;
+        this.creditScore = creditScore;
+        this.enabled = enabled;
+        this.role = role;
+             */
             User user = userRepository.findById(id).orElseThrow( () -> new Exception("User not found"));
             UserResponse userResponse = new UserResponse();
             userResponse.setId(user.getId());
-            userResponse.setUsername(user.getUsername());
-            userResponse.setFirstName(user.getFirstName());
-            userResponse.setLastName(user.getLastName());
-            userResponse.setPhone(user.getPhone());
+            userResponse.setName(user.getName());
+            userResponse.setAge(user.getAge());
             userResponse.setEmail(user.getEmail());
-            userResponse.setRole(user.getRole());
+            userResponse.setAddress(user.getAddress());
+            userResponse.setUsername(user.getUsername());
+            userResponse.setStatus(user.getStatus());
+            userResponse.setCreditScore(user.getCreditScore());
             userResponse.setEnabled(user.isEnabled());
+            userResponse.setRole(user.getRole());
 
             List<UserResponse> list = new ArrayList<>();
             list.add(userResponse);
@@ -102,13 +117,15 @@ public class FilterService {
             for (User user : (List<User>) userList) {
                 UserResponse userResponse = new UserResponse();
                 userResponse.setId(user.getId());
-                userResponse.setUsername(user.getUsername());
-                userResponse.setFirstName(user.getFirstName());
-                userResponse.setLastName(user.getLastName());
-                userResponse.setPhone(user.getPhone());
+                userResponse.setName(user.getName());
+                userResponse.setAge(user.getAge());
                 userResponse.setEmail(user.getEmail());
-                userResponse.setRole(user.getRole());
+                userResponse.setAddress(user.getAddress());
+                userResponse.setUsername(user.getUsername());
+                userResponse.setStatus(user.getStatus());
+                userResponse.setCreditScore(user.getCreditScore());
                 userResponse.setEnabled(user.isEnabled());
+                userResponse.setRole(user.getRole());
                 userResponseList.add(userResponse);
             }
             int totalSize = getData(filters, userClass, userRepository).getTotalSize();

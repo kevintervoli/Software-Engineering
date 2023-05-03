@@ -11,9 +11,9 @@ import java.util.Date;
 public class LogModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "log_seq")
-    @SequenceGenerator(name = "log_seq", sequenceName = "log_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "message")
     private String message;
     @Column(name = "log_level")

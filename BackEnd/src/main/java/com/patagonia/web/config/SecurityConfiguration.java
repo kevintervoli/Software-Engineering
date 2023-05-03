@@ -41,10 +41,7 @@ public class SecurityConfiguration {
                 .permitAll()
 
                 .requestMatchers("/secured/**")
-                .hasAnyAuthority(RoleEnum.ADMIN.name(), RoleEnum.SYSADMIN.name())
-
-                .requestMatchers("/sysadmin/**")
-                .hasAuthority(RoleEnum.SYSADMIN.name())
+                .hasAnyAuthority(RoleEnum.ADMIN.name())
 
                 .anyRequest()
                 .authenticated()

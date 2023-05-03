@@ -53,16 +53,20 @@ public class AuthenticateService implements UserDetailsService {
         }
 
         var user = new User(
-                request.getFirstName(),
-                request.getLastName(),
+                request.getName(),
+                request.getAge(),
                 request.getEmail(),
-                request.getPhone(),
+                request.getAddress(),
                 request.getUsername(),
                 passwordEncoder.encode(request.getPassword()),
-                roleRepository.findById(3L).orElseThrow( () -> new IllegalStateException("Role not found")),
-                true);
+                request.getStatus(),
+                request.getCreditScore(),
+                request.isEnabled(),
+                roleRepository.findById(request.getRoleId()).orElseThrow(() -> new UsernameNotFoundException("Role not found!"))
+        );
 
         userRepository.save(user);
+
 
         logUtil.info("User with username: " + user.getUsername() + " has been registered successfully");
         var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
@@ -86,14 +90,17 @@ public class AuthenticateService implements UserDetailsService {
             }
 
             var user = new User(
-                    request.getFirstName(),
-                    request.getLastName(),
+                    request.getName(),
+                    request.getAge(),
                     request.getEmail(),
-                    request.getPhone(),
+                    request.getAddress(),
                     request.getUsername(),
                     passwordEncoder.encode(request.getPassword()),
-                    roleRepository.findById(request.getRoleId()).orElseThrow(() -> new UsernameNotFoundException("Role not found!")),
-                    request.isEnabled());
+                    request.getStatus(),
+                    request.getCreditScore(),
+                    request.isEnabled(),
+                    roleRepository.findById(request.getRoleId()).orElseThrow(() -> new UsernameNotFoundException("Role not found!"))
+            );
 
             userRepository.save(user);
 
@@ -110,16 +117,32 @@ public class AuthenticateService implements UserDetailsService {
         List<User> users = userRepository.findAll();
         List<UserResponse> response = new ArrayList<>();
 
+        /*
+
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.age = age;
+        this.email = email;
+        this.address = address;
+        this.status = status;
+        this.creditScore = creditScore;
+        this.enabled = enabled;
+        this.role = role;
+         */
+
         for (User user : users) {
             response.add(new UserResponse(
                     user.getId(),
                     user.getUsername(),
-                    user.getFirstName(),
-                    user.getLastName(),
-                    user.getPhone(),
+                    user.getName(),
+                    user.getAge(),
                     user.getEmail(),
-                    user.getRole(),
-                    user.isEnabled()
+                    user.getAddress(),
+                    user.getStatus(),
+                    user.getCreditScore(),
+                    user.isEnabled(),
+                    user.getRole()
             ));
         }
 
@@ -190,11 +213,13 @@ public class AuthenticateService implements UserDetailsService {
     }
     private void updateUser(User user, UserRequest request) {
 
-        Optional.ofNullable(request.getUsername()).ifPresent(user::setUsername);
-        Optional.ofNullable(request.getFirstName()).ifPresent(user::setFirstName);
-        Optional.ofNullable(request.getLastName()).ifPresent(user::setLastName);
+        Optional.ofNullable(request.getName()).ifPresent(user::setName);
+        Optional.ofNullable(request.getAge()).ifPresent(user::setAge);
         Optional.ofNullable(request.getEmail()).ifPresent(user::setEmail);
-        Optional.ofNullable(request.getPhone()).ifPresent(user::setPhone);
+        Optional.ofNullable(request.getAddress()).ifPresent(user::setAddress);
+        Optional.ofNullable(request.getUsername()).ifPresent(user::setUsername);
+        Optional.ofNullable(request.getStatus()).ifPresent(user::setStatus);
+        Optional.ofNullable(request.getCreditScore()).ifPresent(user::setCreditScore);
 
         if (request.getRoleId() != null) {
             Optional.of(request.getRoleId())

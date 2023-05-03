@@ -4,25 +4,30 @@ public class UserResponse {
 
     private Long id;
     private String username;
-    private String firstName;
-    private String lastName;
-    private String phone;
+    private String name;
+    private int age;
     private String email;
-    private Role role;
+    private String address;
+    private int status;
+    private int creditScore;
     private boolean enabled;
+    private Role role;
+
 
     public UserResponse() {
     }
 
-    public UserResponse(Long id, String username, String firstName, String lastName, String phone, String email, Role role, boolean enabled) {
+    public UserResponse(Long id, String username, String name, int age, String email, String address, int status, int creditScore, boolean enabled, Role role) {
         this.id = id;
         this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
+        this.name = name;
+        this.age = age;
         this.email = email;
-        this.role = role;
+        this.address = address;
+        this.status = status;
+        this.creditScore = creditScore;
         this.enabled = enabled;
+        this.role = role;
     }
 
     public Long getId() {
@@ -32,6 +37,7 @@ public class UserResponse {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getUsername() {
         return username;
     }
@@ -40,28 +46,20 @@ public class UserResponse {
         this.username = username;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getAge() {
+        return age;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getEmail() {
@@ -72,12 +70,12 @@ public class UserResponse {
         this.email = email;
     }
 
-    public Role getRole() {
-        return role;
+    public String getAddress() {
+        return address;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public boolean isEnabled() {
@@ -88,17 +86,42 @@ public class UserResponse {
         this.enabled = enabled;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getCreditScore() {
+        return creditScore;
+    }
+
+    public void setCreditScore(int creditScore) {
+        this.creditScore = creditScore;
+    }
+
     @Override
     public String toString() {
-        return "UserModel{" +
-                "id=" + id +'\'' +
-                "username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phone='" + phone + '\'' +
+        return "UserResponse{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
                 ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
                 ", role=" + role +
-                ", enabled=" + enabled +
+                ", status=" + status +
+                ", creditScore=" + creditScore +
                 '}';
     }
 }
