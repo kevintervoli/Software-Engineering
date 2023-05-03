@@ -1,0 +1,182 @@
+Index: BackEnd/src/main/java/com/example/demo/entity/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo.entity;\r\n\r\nimport org.springframework.security.core.GrantedAuthority;\r\nimport org.springframework.security.core.authority.SimpleGrantedAuthority;\r\nimport org.springframework.security.core.userdetails.UserDetails;\r\nimport jakarta.persistence.*;\r\nimport java.util.Collection;\r\nimport java.util.List;\r\n\r\n@Entity\r\n@Table(name = \"User\")\r\npublic class User {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    private int ID;\r\n\r\n    @Column(nullable = false)\r\n    protected String Name;\r\n    @Column(nullable = false)\r\n    protected String Surname;\r\n\r\n    @Column(nullable = false)\r\n    protected int Age;\r\n\r\n    @Column(nullable = false)\r\n    protected String Email;\r\n\r\n    @Column(nullable = false)\r\n    protected String Address;\r\n\r\n    @Column(nullable = false)\r\n    protected String username;\r\n\r\n    @Column(nullable = false)\r\n    protected String Password;\r\n\r\n    @Column(nullable = false)\r\n    protected int Status;\r\n\r\n    @Column(nullable = false)\r\n    protected int Credit_Score;\r\n\r\n    @ManyToOne(fetch = FetchType.LAZY)\r\n    @JoinColumn(name = \"Admin_ID\", referencedColumnName = \"ID\")\r\n    protected Admin admin;\r\n\r\n    public User(String firstName, String lastName,String username,String email,String address,String password,int status, int Cred_Score) {\r\n        this.Name= firstName;\r\n        this.Surname= lastName;\r\n        this.username=username;\r\n        this.Email=email;\r\n        this.Address=address;\r\n        this.Password=password;\r\n        this.Status=status;\r\n        this.Credit_Score=Cred_Score;\r\n\r\n    }\r\n\r\n    public User() {\r\n        this.Name= \"\";\r\n        this.Surname= \"\";\r\n        this.username=\"\";\r\n        this.Email=\"\";\r\n        this.Address=\"\";\r\n        this.Password=\"\";\r\n        this.Status=0;\r\n        this.Credit_Score=0;\r\n    }\r\n\r\n\r\n    public int getID() {\r\n        return ID;\r\n    }\r\n\r\n    public void setID(int ID) {\r\n        this.ID = ID;\r\n    }\r\n\r\n    public String getName() {\r\n        return Name;\r\n    }\r\n\r\n    public void setName(String Name) {\r\n        this.Name = Name;\r\n    }\r\n    public String getSurname() {\r\n        return Surname;\r\n    }\r\n    public void setSurname(String Surname) {\r\n        this.Surname = Surname;\r\n    }\r\n    public int getAge() {\r\n        return Age;\r\n    }\r\n\r\n    public void setAge(int Age) {\r\n        this.Age = Age;\r\n    }\r\n\r\n    public String getEmail() {\r\n        return Email;\r\n    }\r\n\r\n    public void setEmail(String Email) {\r\n        this.Email = Email;\r\n    }\r\n\r\n    public String getAddress() {\r\n        return Address;\r\n    }\r\n\r\n    public void setAddress(String Address) {\r\n        this.Address = Address;\r\n    }\r\n\r\n    public String getUsername() {\r\n        return username;\r\n    }\r\n\r\n    public void setUsername(String username) {\r\n        this.username = username;\r\n    }\r\n\r\n    public String getPassword() {\r\n        return Password;\r\n    }\r\n\r\n    public void setPassword(String Password) {\r\n        this.Password = Password;\r\n    }\r\n\r\n    public int getStatus() {\r\n        return Status;\r\n    }\r\n\r\n    public void setStatus(int Status) {\r\n        this.Status = Status;\r\n    }\r\n\r\n    public int getCredit_Score() {\r\n        return Credit_Score;\r\n    }\r\n\r\n    public void setCredit_Score(int Credit_Score) {\r\n        this.Credit_Score = Credit_Score;\r\n    }\r\n\r\n    public Admin getAdmin() {\r\n        return admin;\r\n    }\r\n\r\n    public void setAdmin(Admin admin) {\r\n        this.admin = admin;\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/BackEnd/src/main/java/com/example/demo/entity/User.java b/BackEnd/src/main/java/com/example/demo/entity/User.java
+--- a/BackEnd/src/main/java/com/example/demo/entity/User.java	
++++ b/BackEnd/src/main/java/com/example/demo/entity/User.java	
+@@ -9,7 +9,7 @@
+ 
+ @Entity
+ @Table(name = "User")
+-public class User {
++public class User implements UserDetails {
+ 
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+@@ -45,6 +45,7 @@
+     @JoinColumn(name = "Admin_ID", referencedColumnName = "ID")
+     protected Admin admin;
+ 
++
+     public User(String firstName, String lastName,String username,String email,String address,String password,int status, int Cred_Score) {
+         this.Name= firstName;
+         this.Surname= lastName;
+@@ -118,10 +119,35 @@
+         return username;
+     }
+ 
++    @Override
++    public boolean isAccountNonExpired() {
++        return true;
++    }
++
++    @Override
++    public boolean isAccountNonLocked() {
++        return false;
++    }
++
++    @Override
++    public boolean isCredentialsNonExpired() {
++        return false;
++    }
++
++    @Override
++    public boolean isEnabled() {
++        return true;
++    }
++
+     public void setUsername(String username) {
+         this.username = username;
+     }
+ 
++    @Override
++    public Collection<? extends GrantedAuthority> getAuthorities() {
++        return null;
++    }
++
+     public String getPassword() {
+         return Password;
+     }
+Index: BackEnd/src/main/java/com/example/demo/config/ApplicationConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo.config;\r\n\r\nimport com.example.demo.repository.UserRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.context.annotation.Bean;\r\nimport org.springframework.context.annotation.Configuration;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.authentication.AuthenticationProvider;\r\nimport org.springframework.security.authentication.dao.DaoAuthenticationProvider;\r\nimport org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.core.userdetails.UsernameNotFoundException;\r\nimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport com.example.demo.repository.UserRepository;\r\n@Configuration\r\npublic class ApplicationConfig {\r\n\r\n    private final UserRepository userRepository;\r\n\r\n    public ApplicationConfig(UserRepository userRepository) {\r\n        this.userRepository = userRepository;\r\n    }\r\n\r\n    @Bean\r\n    public UserDetailsService userDetailsService() {\r\n        return username -> userRepository.findByUsername(username)\r\n                .orElseThrow(() -> new UsernameNotFoundException(\"User not found!\"));\r\n    }\r\n\r\n    @Bean\r\n    public PasswordEncoder passwordEncoder() {\r\n        return new BCryptPasswordEncoder();\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationProvider authenticationProvider(){\r\n\r\n        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();\r\n        authProvider.setUserDetailsService(userDetailsService());\r\n        authProvider.setPasswordEncoder(passwordEncoder());\r\n        return authProvider;\r\n    }\r\n\r\n    @Bean\r\n    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {\r\n        return config.getAuthenticationManager();\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/BackEnd/src/main/java/com/example/demo/config/ApplicationConfig.java b/BackEnd/src/main/java/com/example/demo/config/ApplicationConfig.java
+--- a/BackEnd/src/main/java/com/example/demo/config/ApplicationConfig.java	
++++ b/BackEnd/src/main/java/com/example/demo/config/ApplicationConfig.java	
+@@ -1,18 +1,19 @@
+ package com.example.demo.config;
+ 
+ import com.example.demo.repository.UserRepository;
+-import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.context.annotation.Bean;
+ import org.springframework.context.annotation.Configuration;
+ import org.springframework.security.authentication.AuthenticationManager;
+ import org.springframework.security.authentication.AuthenticationProvider;
+ import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+ import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
++import org.springframework.security.core.userdetails.UserDetails;
+ import org.springframework.security.core.userdetails.UserDetailsService;
+ import org.springframework.security.core.userdetails.UsernameNotFoundException;
+ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+ import org.springframework.security.crypto.password.PasswordEncoder;
+-import com.example.demo.repository.UserRepository;
++
++
+ @Configuration
+ public class ApplicationConfig {
+ 
+@@ -24,8 +25,8 @@
+ 
+     @Bean
+     public UserDetailsService userDetailsService() {
+-        return username -> userRepository.findByUsername(username)
+-                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
++        return username -> (UserDetails) userRepository.findByUsername(username)
++                .orElseThrow(() -> new UsernameNotFoundException("Username " + username + " not found"));
+     }
+ 
+     @Bean
+Index: BackEnd/src/main/java/com/example/demo/entity/Role.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo.entity;\r\n\r\nimport com.fasterxml.jackson.annotation.JsonBackReference;\r\n\r\nimport jakarta.persistence.*;\r\nimport java.util.List;\r\n\r\n\r\n\r\n@Entity\r\n@Table(name = \"role\")\r\npublic class Role {\r\n\r\n    @Id    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = \"role_seq\")\r\n    @SequenceGenerator(name = \"role_seq\", sequenceName = \"role_seq\", allocationSize = 1)\r\n    private Long id;\r\n    private String name;\r\n    @JsonBackReference\r\n    @OneToMany(mappedBy = \"role\")\r\n    private List<User> users;\r\n\r\n    public Long getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(Long id) {\r\n        this.id = id;\r\n    }\r\n\r\n    public Role() {\r\n    }\r\n    public Role(int roleId, String roleName) {\r\n        this.id = (long) roleId;\r\n        this.name = roleName;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public List<User> getUsers() {\r\n        return users;\r\n    }\r\n\r\n    public void setUsers(List<User> users) {\r\n        this.users = users;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Role{\" +\r\n                \"id=\" + id +\r\n                \", name='\" + name + '\\'' +\r\n                \", users=\" + users +\r\n                '}';\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/BackEnd/src/main/java/com/example/demo/entity/Role.java b/BackEnd/src/main/java/com/example/demo/entity/Role.java
+--- a/BackEnd/src/main/java/com/example/demo/entity/Role.java	
++++ b/BackEnd/src/main/java/com/example/demo/entity/Role.java	
+@@ -6,17 +6,17 @@
+ import java.util.List;
+ 
+ 
+-
+ @Entity
+-@Table(name = "role")
++@Table(name = "Role")
+ public class Role {
+ 
+     @Id    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq")
+     @SequenceGenerator(name = "role_seq", sequenceName = "role_seq", allocationSize = 1)
+     private Long id;
++
+     private String name;
+     @JsonBackReference
+-    @OneToMany(mappedBy = "role")
++    @OneToMany(mappedBy = "Role")
+     private List<User> users;
+ 
+     public Long getId() {
+Index: BackEnd/src/main/java/com/example/demo/service/AuthenticateService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo.service;\r\n\r\nimport com.example.demo.entity.*;\r\nimport com.example.demo.repository.RoleRepository;\r\nimport com.example.demo.repository.UserRepository;\r\nimport com.example.demo.util.LogUtil;\r\nimport lombok.var;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.authentication.BadCredentialsException;\r\nimport org.springframework.security.authentication.UsernamePasswordAuthenticationToken;\r\nimport org.springframework.security.core.AuthenticationException;\r\nimport org.springframework.security.core.GrantedAuthority;\r\nimport org.springframework.security.core.authority.SimpleGrantedAuthority;\r\nimport org.springframework.security.core.userdetails.UserDetails;\r\nimport org.springframework.security.core.userdetails.UserDetailsService;\r\nimport org.springframework.security.core.userdetails.UsernameNotFoundException;\r\nimport org.springframework.security.crypto.bcrypt.BCrypt;\r\nimport org.springframework.security.crypto.password.PasswordEncoder;\r\nimport org.springframework.stereotype.Service;\r\n\r\nimport java.lang.reflect.Field;\r\nimport java.util.ArrayList;\r\nimport java.util.Collection;\r\nimport java.util.Collections;\r\nimport java.util.List;\r\n\r\n@Service\r\npublic class AuthenticateService implements UserDetailsService {\r\n\r\n    private final UserRepository userRepository;\r\n    private final RoleRepository roleRepository;\r\n    private final PasswordEncoder passwordEncoder;\r\n    private final JwtService jwtService;\r\n    private final AuthenticationManager authenticationManager;\r\n    private final LogUtil logUtil;\r\n\r\n    public AuthenticateService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager, LogUtil logUtil) {\r\n        this.userRepository = userRepository;\r\n        this.roleRepository = roleRepository;\r\n        this.passwordEncoder = passwordEncoder;\r\n        this.jwtService = jwtService;\r\n        this.authenticationManager = authenticationManager;\r\n        this.logUtil = logUtil;\r\n    }\r\n\r\n\r\n    public AuthenticationResponse register(UserRequest request) {\r\n\r\n        boolean userExists = userRepository.findByUsername(request.getUsername())\r\n                .isPresent();\r\n\r\n        if (userExists) {\r\n            logUtil.warn(\"username already taken\");\r\n            throw new IllegalStateException(\"username already taken\");\r\n        }\r\n\r\n        var user = new User(\r\n                request.getFirstName(),\r\n                request.getLastName(),\r\n                request.getEmail(),\r\n                request.getPhone(),\r\n                request.getUsername(),\r\n                passwordEncoder.encode(request.getPassword()),\r\n                roleRepository.findById(request.getRoleId()).orElseThrow(() -> new UsernameNotFoundException(\"Role not found!\")),\r\n                request.isEnabled());\r\n\r\n        userRepository.save(user);\r\n\r\n        logUtil.info(\"User with username: \" + user.getUsername() + \" has been registered successfully\");\r\n        var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());\r\n        return new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole());\r\n\r\n    }\r\n\r\n    public ResponseWrapper<List<UserResponse>>getAllUsers() {\r\n\r\n        List<User> users = userRepository.findAll();\r\n        List<UserResponse> response = new ArrayList<>();\r\n\r\n        for (User user : users) {\r\n            response.add(new UserResponse(\r\n                    user.getId(),\r\n                    user.getUsername(),\r\n                    user.getFirstName(),\r\n                    user.getLastName(),\r\n                    user.getPhone(),\r\n                    user.getEmail(),\r\n                    user.getRole(),\r\n                    user.isEnabled()\r\n            ));\r\n        }\r\n\r\n        ResponseWrapper<List<UserResponse>> responseWrapper = new ResponseWrapper<>();\r\n        responseWrapper.setContent(response);\r\n\r\n        return responseWrapper;\r\n    }\r\n\r\n    public AuthenticationResponse authenticate(AuthenticationRequest request) {\r\n        try {\r\n            authenticationManager.authenticate(\r\n                    new UsernamePasswordAuthenticationToken(\r\n                            request.getUsername(),\r\n                            request.getPassword()\r\n                    ));\r\n        } catch (AuthenticationException e) {\r\n            System.err.println(\"e :\" + e.getMessage());\r\n            throw new BadCredentialsException(\"Invalid username or password\");\r\n        }\r\n\r\n        User user = userRepository.findByUsername(request.getUsername())\r\n                .orElseThrow(() -> new UsernameNotFoundException(\"No user \" +\r\n                        \"Found with username : \" + request.getUsername()));\r\n\r\n        if (!user.isEnabled()) {\r\n            throw new RuntimeException(\"User is not enabled\");\r\n        }\r\n        var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());\r\n        return new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole());\r\n    }\r\n\r\n    private Collection<? extends GrantedAuthority> getAuthorities(String role) {\r\n        return Collections.singletonList(new SimpleGrantedAuthority(role));\r\n    }\r\n\r\n    @Override\r\n    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {\r\n        User user = userRepository.findByUsername(username)\r\n                .orElseThrow(() -> new UsernameNotFoundException(\"No user \" +\r\n                        \"Found with username : \" + username));\r\n\r\n        return new org.springframework.security.core.userdetails.User(user.getUsername(),\r\n                user.getPassword(), getAuthorities(user.getRole().getName()));\r\n    }\r\n\r\n    public ResponseWrapper<?> editUser(UserRequest request) {\r\n\r\n        User user = userRepository.findByUsername(request.getUsername())\r\n                .orElseThrow(() -> new UsernameNotFoundException(\"No user \" +\r\n                        \"Found with username : \" + request.getUsername()));\r\n\r\n        Field[] fields = request.getClass().getDeclaredFields();\r\n\r\n        for (Field field : fields) {\r\n            try {\r\n                if (field.get(request) != null) {\r\n\r\n                    field.setAccessible(true);\r\n                    if (!field.getName().equals(\"role\")){\r\n                        field.set(user, field.get(request));\r\n                    }else{\r\n                        field.set(user, roleRepository.findById(request.getRoleId()).orElseThrow(() -> new UsernameNotFoundException(\"Role not found!\")));\r\n                    }\r\n                }\r\n            } catch (IllegalAccessException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        }\r\n\r\n        userRepository.save(user);\r\n        logUtil.info(\"User with username: \" + user.getUsername() + \" has been edited successfully\");\r\n        return new ResponseWrapper<>(true, \"User with username: \" + user.getUsername() + \" has been edited successfully\");\r\n    }\r\n\r\n    public boolean changePassword(String token, String oldPassword, String newPassword) {\r\n\r\n        String username = jwtService.extractUsername(token);\r\n        User user = userRepository.findByUsername(username)\r\n                .orElseThrow(() -> new UsernameNotFoundException(\"No user \" +\r\n                        \"Found with username : \" + username));\r\n\r\n        if (BCrypt.checkpw(oldPassword, user.getPassword())) {\r\n            user.setPassword(passwordEncoder.encode(newPassword));\r\n            userRepository.save(user);\r\n            return true;\r\n        }\r\n\r\n        return false;\r\n    }\r\n\r\n    public ResponseWrapper<List<Role>> getRoles() {\r\n\r\n        List<Role> roles = roleRepository.findAll();\r\n        return new ResponseWrapper<>(true, \"The list with roles is retrived.\", roles, roles.size());\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/BackEnd/src/main/java/com/example/demo/service/AuthenticateService.java b/BackEnd/src/main/java/com/example/demo/service/AuthenticateService.java
+--- a/BackEnd/src/main/java/com/example/demo/service/AuthenticateService.java	
++++ b/BackEnd/src/main/java/com/example/demo/service/AuthenticateService.java	
+@@ -54,7 +54,7 @@
+             throw new IllegalStateException("username already taken");
+         }
+ 
+-        var user = new User(
++        User user = new User(
+                 request.getFirstName(),
+                 request.getLastName(),
+                 request.getEmail(),
+@@ -67,7 +67,7 @@
+         userRepository.save(user);
+ 
+         logUtil.info("User with username: " + user.getUsername() + " has been registered successfully");
+-        var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
++        String jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
+         return new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole());
+ 
+     }
+@@ -115,7 +115,7 @@
+         if (!user.isEnabled()) {
+             throw new RuntimeException("User is not enabled");
+         }
+-        var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
++        String jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
+         return new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole());
+     }
+ 
+Index: BackEnd/src/main/java/com/example/demo/repository/UserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.demo.repository;\r\n\r\nimport com.example.demo.entity.User;\r\nimport org.springframework.context.annotation.ComponentScan;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.data.jpa.repository.JpaSpecificationExecutor;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.util.Optional;\r\n\r\n\r\n@Repository\r\npublic interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {\r\n\r\n    Optional<User> findByUsername(String username);\r\n\r\n}\r\n
+===================================================================
+diff --git a/BackEnd/src/main/java/com/example/demo/repository/UserRepository.java b/BackEnd/src/main/java/com/example/demo/repository/UserRepository.java
+--- a/BackEnd/src/main/java/com/example/demo/repository/UserRepository.java	
++++ b/BackEnd/src/main/java/com/example/demo/repository/UserRepository.java	
+@@ -1,7 +1,6 @@
+ package com.example.demo.repository;
+ 
+ import com.example.demo.entity.User;
+-import org.springframework.context.annotation.ComponentScan;
+ import org.springframework.data.jpa.repository.JpaRepository;
+ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+ import org.springframework.stereotype.Repository;

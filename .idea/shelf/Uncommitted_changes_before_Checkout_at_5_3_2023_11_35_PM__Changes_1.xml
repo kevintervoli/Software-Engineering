@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1" date="1683149818214" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 5/3/2023 11:35 PM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="BackEnd/target/classes/com/example/demo/entity/User.class" />
+    <option name="AFTER_PATH" value="BackEnd/target/classes/com/example/demo/entity/User.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/User.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BackEnd/target/classes/com/example/demo/entity/Role.class" />
+    <option name="AFTER_PATH" value="BackEnd/target/classes/com/example/demo/entity/Role.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/Role.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BackEnd/target/classes/com/example/demo/config/ApplicationConfig.class" />
+    <option name="AFTER_PATH" value="BackEnd/target/classes/com/example/demo/config/ApplicationConfig.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/ApplicationConfig.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="BackEnd/target/classes/com/example/demo/controller/AuthenticationController.class" />
+    <option name="AFTER_PATH" value="BackEnd/target/classes/com/example/demo/controller/AuthenticationController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/AuthenticationController.class" />
+  </binary>
+</changelist>
