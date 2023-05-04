@@ -1,77 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 
 <head>
-    <title></title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Admin Dashboard</title>
 </head>
 
 <body>
-    <?php
-    require_once '../PHP/rest_api.php';
-    $db = new Database();
-    ?>
-    <form id="userForm" method="GET" action=".">
-        <h1>User Table</h1>
-        Click here to <a href="../PHP/logout.php">Logout</a>
-        <br>
-        <input class="btn btn-primary btn-sm" type="submit" name="fillButton" value="FILL TABLE" />
-        <input class="btn btn-primary btn-sm" type="submit" name="add" value="ADD" />
-        <input type="text" name="id" placeholder="ID"/>
-        <input type="text" name="username" placeholder="USERNAME" />
-        <input class='btn btn-danger btn-sm' type='submit' name='deleteButton' value='Delete' />
-        <br>
-        <br>
-    </form>
-    <form id="part2" method="POST">
-        <input type="number"  name="id_2" placeholder="ID" />
-        <input type="text"  name="name" placeholder="Name"/>
-        <input type="text" name="surname" placeholder="Surname" />
-        <input type="number" name="age" placeholder="Age"/>
-        <input type="text" name="email" placeholder="Email" pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"/>
-        <input type="text" name="address" placeholder="Address" />
-        <input type="text" name="username_2" placeholder="Username" />
-        <input type="text" name="password" placeholder="Password"/>
-        <input type="number" name="status" placeholder="Status"pattern = "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
-        <input class='btn btn-primary btn-sm' type='submit' name='edit' value='EDIT' />
-        <a  class='btn btn-primary btn-sm' href="../index.php">GO HOME</a>
-        <br>
-        <br>
-    </form>
-    <section>
-        <table class="table">
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Age</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Status</th>
-            </tr>
-            <?php
-                if (isset($_POST['edit'])) {
-                    $id = $_POST['id_2'];
-                    $name = $_POST['name'];
-                    $surname = $_POST['surname'];
-                    $age = $_POST['age'];
-                    $email = $_POST['email'];
-                    $address = $_POST['address'];
-                    $username = $_POST['username_2'];
-                    $password = $_POST['password'];
-                    $status = $_POST['status'];
-                    $password = password_hash($password, PASSWORD_BCRYPT);
-                    $db->update($id, $name, $surname, $age, $email, $address, $username, $password, $status);
-                }
-            ?>
-        </table>
-    </section>
-    <script src="../assets/js/admin-api.js"></script>
+    <div class="container" id="top">
+        <aside class="sidebar-wrapper">
+            <div class="sidebar-header">
+                <img src="img/logo-icon.png" alt="Logo">
+                <h4>rocker</h4>
+                <div class="close-menu">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">
+                            <i class="fas fa-home"></i>
+                            <div class="title">dashboard</div>
+                        </a></li>
+                    <li><a href="#">
+                            <i class="fas fa-users"></i>
+                            <div class="title">customers</div>
+                        </a></li>
+                    <li><a href="#">
+                            <i class="fas fa-tasks"></i>
+                            <div class="title">projects</div>
+                        </a></li>
+                    <li><a href="#">
+                            <i class="fas fa-shopping-bag"></i>
+                            <div class="title">orders</div>
+                        </a></li>
+                    <li><a href="#">
+                            <i class="far fa-user-circle"></i>
+                            <div class="title">accounts</div>
+                        </a></li>
+                    <li><a href="#">
+                            <i class="far fa-question-circle"></i>
+                            <div class="title">FAQ</div>
+                        </a></li>
+                    <li><a href="#">
+                            <i class="fas fa-headset"></i>
+                            <div class="title">support</div>
+                        </a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="content">
+            <header>
+                <div class="header-wrapper">
+                    <div class="header-left">
+                        <div class="toggle-icon">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <div class="header-right">
+                        <div class="star-container">
+                            <div class="star-left">
+                                <i class="far fa-star"></i>
+                                <span>star</span>
+                            </div>
+                            <div class="star-right">
+                                327
+                            </div>
+                        </div>
+                        <img src="img/avatar-2.png" alt="avatar">
+                    </div>
+                </div>
+            </header>
+            <section class="main">
+                <div class="box box-1">
+                    <div class="box-left">
+                        <h4>congratulations pauline!</h4>
+                        <p>You have done 72% more sales today. Check your new badge in your profile.</p>
+                        <a href="#">view badges</a>
+                    </div>
+                    <div class="box-right">
+                        <img src="img/profile.png" alt="profile">
+                    </div>
+                </div>
+                <div class="box box-2">
+                    <div class="box-details">
+                        <h4>54</h4>
+                        <span>customers</span>
+                    </div>
+                    <div class="box-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="box box-3">
+                    <div class="box-details">
+                        <h4>79</h4>
+                        <span>projects</span>
+                    </div>
+                    <div class="box-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                </div>
+                <div class="box box-4">
+                    <div class="box-details">
+                        <h4>124</h4>
+                        <span>orders</span>
+                    </div>
+                    <div class="box-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                </div>
+                <div class="box box-5">
+                    <div class="box-details">
+                        <h4>$6k</h4>
+                        <span>income</span>
+                    </div>
+                    <div class="box-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                </div>
+                <div class="box box-6">
+                    <div class="box-header">
+                        <h4>recent orders</h4>
+                        <a href="#">see all</a>
+                    </div>
+                    <div class="box-body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>product</th>
+                                    <th>product id</th>
+                                    <th>status</th>
+                                    <th>amount</th>
+                                    <th>date</th>
+                                    <th>shipping</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Iphone 5</td>
+                                    <td>#9405822</td>
+                                    <td><span class="badge badge-1">paid</span></td>
+                                    <td>$1250.00</td>
+                                    <td>03 Feb 2020</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bar-1" style="width: 100%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Earphone GL</td>
+                                    <td>#8304620</td>
+                                    <td><span class="badge badge-2">pending</span></td>
+                                    <td>$1500.00</td>
+                                    <td>05 Feb 2020</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bar-2" style="width: 60%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>HD Hand Camera</td>
+                                    <td>#4736890</td>
+                                    <td><span class="badge badge-3">failled</span></td>
+                                    <td>$1400.00</td>
+                                    <td>06 Feb 2020</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bar-3" style="width: 70%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Clasic Shoes</td>
+                                    <td>#8543765</td>
+                                    <td><span class="badge badge-1">paid</span></td>
+                                    <td>$1200.00</td>
+                                    <td>14 Feb 2020</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bar-1" style="width:100%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sitting Chair</td>
+                                    <td>#9629240</td>
+                                    <td><span class="badge badge-2">pending</span></td>
+                                    <td>$1500.00</td>
+                                    <td>18 Feb 2020</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bar-2" style="width: 60%;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Hand Watch</td>
+                                    <td>#8506790</td>
+                                    <td><span class="badge badge-3">failled</span></td>
+                                    <td>$1800.00</td>
+                                    <td>21 Feb 2020</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bar-3" style="width:70% ;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box box-7">
+                    <div class="box-header">
+                        <h4>new customers</h4>
+                        <a href="#">see all</a>
+                    </div>
+                    <div class="box-container">
+                        <div class="customer">
+                            <img src="img/avatar-2.png" alt="avatar">
+                            <div class="info">
+                                <h5>pauline seitz</h5>
+                            </div>
+                            <div class="contacts">
+                                <i class="fas fa-user-circle"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                        </div>
+                        <div class="customer">
+                            <img src="img/avatar-2.png" alt="avatar">
+                            <div class="info">
+                                <h5>pauline seitz</h5>
+                            </div>
+                            <div class="contacts">
+                                <i class="fas fa-user-circle"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                        </div>
+                        <div class="customer">
+                            <img src="img/avatar-2.png" alt="avatar">
+                            <div class="info">
+                                <h5>pauline seitz</h5>
+                            </div>
+                            <div class="contacts">
+                                <i class="fas fa-user-circle"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                        </div>
+                        <div class="customer">
+                            <img src="img/avatar-2.png" alt="avatar">
+                            <div class="info">
+                                <h5>pauline seitz</h5>
+                            </div>
+                            <div class="contacts">
+                                <i class="fas fa-user-circle"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                        </div>
+                        <div class="customer">
+                            <img src="img/avatar-2.png" alt="avatar">
+                            <div class="info">
+                                <h5>pauline seitz</h5>
+                            </div>
+                            <div class="contacts">
+                                <i class="fas fa-user-circle"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                        </div>
+                        <div class="customer">
+                            <img src="img/avatar-2.png" alt="avatar">
+                            <div class="info">
+                                <h5>pauline seitz</h5>
+                            </div>
+                            <div class="contacts">
+                                <i class="fas fa-user-circle"></i>
+                                <i class="far fa-comment-alt"></i>
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-8">
+                    <div class="box-left">
+                        <h4>profile report</h4>
+                        <span class="year">year 2021</span>
+                        <span class="percentage">^68.2%</span>
+                        <h3>$84,686k</h3>
+                    </div>
+                    <div class="box-right">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+                <div class="box box-9">
+                    <div class="box-header">
+                        <h4>
+                            Orders Summary
+                        </h4>
+                    </div>
+                    <div class="circle">
+                        <div class="inner-circle">Weekly</div>
+                    </div>
+                    <div class="box-bottom">
+                        <div class="list">
+                            <span>completed</span>
+                            <span>25</span>
+                        </div>
+                        <div class="list">
+                            <span>pending</span>
+                            <span>10</span>
+                        </div>
+                        <div class="list">
+                            <span>process</span>
+                            <span>65</span>
+                        </div>
+                        <div class="list">
+                            <span>failled</span>
+                            <span>5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-10">
+                    <div class="box-header">
+                        <h4>last projects</h4>
+                    </div>
+                    <div class="box-body">
+                        <div class="project">
+                            <div class="project-left">
+                                <h5>project 1</h5>
+                                <span>department 1</span>
+                            </div>
+                            <div class="project-right">
+                                <i class="far fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="project">
+                            <div class="project-left">
+                                <h5>project 2</h5>
+                                <span>department 2</span>
+                            </div>
+                            <div class="project-right">
+                                <i class="far fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="project">
+                            <div class="project-left">
+                                <h5>project 3</h5>
+                                <span>department 3</span>
+                            </div>
+                            <div class="project-right">
+                                <i class="far fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="project">
+                            <div class="project-left">
+                                <h5>project 4</h5>
+                                <span>department 4</span>
+                            </div>
+                            <div class="project-right">
+                                <i class="far fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="project">
+                            <div class="project-left">
+                                <h5>project 5</h5>
+                                <span>department 5</span>
+                            </div>
+                            <div class="project-right">
+                                <i class="far fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="project">
+                            <div class="project-left">
+                                <h5>project 6</h5>
+                                <span>department 6</span>
+                            </div>
+                            <div class="project-right">
+                                <i class="far fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="project">
+                            <div class="project-left">
+                                <h5>project 7</h5>
+                                <span>department 7</span>
+                            </div>
+                            <div class="project-right">
+                                <i class="far fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="copyright">
+                    copyright &copy; 2022. all right reserved.
+                </div>
+            </footer>
+        </main>
+    </div>
+    <div class="switcher-container">
+        <div class="switcher-icon">
+            <i class="fas fa-cog"></i>
+        </div>
+        <div class="switcher-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="switcher-header">
+            <h3>theme customizer</h3>
+            <h4>theme styles</h4>
+        </div>
+        <div class="switcher-body">
+            <ul>
+                <li data-color="#f7f7f7" class="active"></li>
+                <li data-color="#212529"></li>
+            </ul>
+        </div>
+    </div>
+    <a href="#top" class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    <script src="js/main.js"></script>
+    <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
