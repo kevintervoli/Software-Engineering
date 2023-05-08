@@ -37,7 +37,7 @@ public class Admin extends AuthenticationResponse implements UserDetails {
     @JoinColumn(name = "Role_id")
     private Role role;
     @Column(name = "Enabled")
-    private boolean enabled;
+    private Boolean enabled;
 
     public Admin() {}
 

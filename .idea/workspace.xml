@@ -4,92 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0586f90-bfff-4011-a58e-4e9eccc1d64a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/AdminRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/view/CombinedUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/AdminRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/CombinedUserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/util/DateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM__Changes_1.xml" afterDir="false" />
+    <list default="true" id="d1ab561e-5750-460d-9e7a-d139c44d3ec2" name="Changes" comment="auth fix">
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/DemoApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/config/ApplicationConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/config/SecurityConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/controller/AuthenticationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/Admin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/Agent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/Area.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/Auction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/AuthenticationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/AuthenticationResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/LogModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/Property.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/ResponseWrapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/UserRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/entity/UserResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/enums/RoleEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/filter/JwtAuthenticationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/repository/LogRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/repository/RoleRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/service/AuthenticateService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/service/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/example/demo/util/LogUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/config/ApplicationConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/controller/AuthenticationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/AuthenticationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/LogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/LogRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/search/GeneralSpecification.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/search/GeneralSpecification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/view/CombinedUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/view/CombinedUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/FilterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/FilterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/util/LogUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/util/LogUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/JwtService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/DemoApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/config/ApplicationConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/config/SecurityConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/controller/AuthenticationController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/entity/AuthenticationRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/entity/AuthenticationResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/entity/LogModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/entity/ResponseWrapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/entity/Role.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/entity/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/entity/UserRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/entity/UserResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/enums/RoleEnum.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/filter/JwtAuthenticationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/repository/LogRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/repository/RoleRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/repository/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/service/AuthenticateService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/service/JwtService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/example/demo/util/LogUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/BackEnd/BackEndApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/config/ApplicationConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/config/ApplicationConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/controller/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/controller/AuthenticationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/controller/AuthenticationController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/Admin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/AuthenticationResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/AuthenticationResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/repository/RoleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/repository/RoleRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/search/GeneralSpecification.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/search/GeneralSpecification.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/service/AuthenticateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/service/AuthenticateService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/service/FilterService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/service/FilterService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/util/LogUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/util/LogUtil.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +37,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -123,6 +51,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2PJwhRazNJt0nPEtQ33PFHLYGsa" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -197,10 +128,30 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java</url>
-          <line>180</line>
-          <option name="timeStamp" value="8" />
+          <line>197</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/filter/JwtAuthenticationFilter.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.patagonia.web.entity.User" memberName="enabled" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
