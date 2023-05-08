@@ -1,5 +1,6 @@
-package com.patagonia.web.entity;
+package com.patagonia.web.entity.view;
 
+import com.patagonia.web.entity.AuthenticationResponse;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,49 +11,45 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Entity
-@Table(name = "Admin")
-public class Admin extends AuthenticationResponse implements UserDetails {
+@Table(name = "combined_users")
+public class CombinedUser  extends AuthenticationResponse implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
+
     @Column(name = "Name")
     private String name;
+
     @Column(name = "Surname")
     private String surname;
+
     @Column(name = "Username")
     private String username;
+
     @Column(name = "Password")
     private String password;
+
     @Column(name = "Email")
     private String email;
+
     @Column(name = "Address")
     private String address;
+
     @Column(name = "Gender")
     private String gender;
+
     @Column(name = "Age")
     private int age;
-    @ManyToOne
-    @JoinColumn(name = "Role_id")
-    private Role role;
+
+    @Column(name = "Role_id")
+    private int roleId;
+
     @Column(name = "Enabled")
     private boolean enabled;
 
-    public Admin() {}
-
-    public Admin(String name, String surname, String username, String password, String email, String address, String gender, int age, Role role, boolean enabled) {
-        this.name = name;
-        this.surname = surname;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.address = address;
-        this.gender = gender;
-        this.age = age;
-        this.role = role;
-        this.enabled = enabled;
-    }
+    @Column(name = "role")
+    private String roles;
 
     public int getId() {
         return id;
@@ -97,14 +94,13 @@ public class Admin extends AuthenticationResponse implements UserDetails {
         return true;
     }
 
-
     public void setUsername(String username) {
         this.username = username;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.unmodifiableList(Arrays.asList(new SimpleGrantedAuthority(role.getName())));
+        return Collections.unmodifiableList(Arrays.asList(new SimpleGrantedAuthority(roles.toUpperCase())));
     }
     public String getPassword() {
         return password;
@@ -146,20 +142,27 @@ public class Admin extends AuthenticationResponse implements UserDetails {
         this.age = age;
     }
 
-    public String getClassName() {
-        return "Admin";
+    public int getRoleId() {
+        return roleId;
     }
 
-    public Role getRole() {
-        return role;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
-    public void setRole(Role role) {
-        this.role = role;
-    }
+
     public boolean isEnabled() {
         return enabled;
     }
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRole(String role) {
+        this.roles = role;
     }
 }

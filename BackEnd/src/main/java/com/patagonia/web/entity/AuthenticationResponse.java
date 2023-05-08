@@ -6,6 +6,7 @@ public class AuthenticationResponse {
     private String username;
     private String token;
     private Role role;
+    private boolean enabled;
 
     public AuthenticationResponse() {
     }
@@ -24,6 +25,13 @@ public class AuthenticationResponse {
     public AuthenticationResponse(String username, Role role) {
         this.username = username;
         this.role = role;
+    }
+
+    public AuthenticationResponse(String username, String token, Role role, boolean enabled) {
+        this.username = username;
+        this.token = token;
+        this.role = role;
+        this.enabled = enabled;
     }
 
     public String getUsername() {
@@ -50,12 +58,21 @@ public class AuthenticationResponse {
         this.role = role;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "AuthenticationResponse{" +
                 "username='" + username + '\'' +
                 ", token='" + token + '\'' +
                 ", role=" + role +
+                ", enabled=" + enabled +
                 '}';
     }
 }

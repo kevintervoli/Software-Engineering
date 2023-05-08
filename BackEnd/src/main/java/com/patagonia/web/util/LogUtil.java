@@ -11,7 +11,6 @@ import java.util.Date;
 public class LogUtil {
 
     private final LogRepository logRepository;
-
     public LogUtil(LogRepository logRepository) {
         this.logRepository = logRepository;
     }
@@ -20,7 +19,7 @@ public class LogUtil {
         LogModel logModel = new LogModel();
         logModel.setMessage(message);
         logModel.setLogLevel("ERROR");
-        logModel.setCreatedAt(new Date(System.currentTimeMillis()));
+        logModel.setCreatedAt(DateUtil.getCurrentTimeFilterFormat());
         logModel.setEventType(type);
         logRepository.save(logModel);
     }
@@ -29,7 +28,7 @@ public class LogUtil {
         LogModel logModel = new LogModel();
         logModel.setMessage(message);
         logModel.setLogLevel("ERROR");
-        logModel.setCreatedAt(new Date(System.currentTimeMillis()));
+        logModel.setCreatedAt(DateUtil.getCurrentTimeFilterFormat());
         logRepository.save(logModel);
     }
 
@@ -37,7 +36,7 @@ public class LogUtil {
         LogModel logModel = new LogModel();
         logModel.setMessage(message);
         logModel.setLogLevel("INFO");
-        logModel.setCreatedAt(new Date(System.currentTimeMillis()));
+        logModel.setCreatedAt(DateUtil.getCurrentTimeFilterFormat());
         logModel.setEventType(type);
         logRepository.save(logModel);
     }
@@ -46,7 +45,7 @@ public class LogUtil {
         LogModel logModel = new LogModel();
         logModel.setMessage(message);
         logModel.setLogLevel("INFO");
-        logModel.setCreatedAt(new Date(System.currentTimeMillis()));
+        logModel.setCreatedAt(DateUtil.getCurrentTimeFilterFormat());
         logRepository.save(logModel);
     }
 
@@ -54,7 +53,16 @@ public class LogUtil {
         LogModel logModel = new LogModel();
         logModel.setMessage(message);
         logModel.setLogLevel("DEBUG");
-        logModel.setCreatedAt(new Date(System.currentTimeMillis()));
+        logModel.setCreatedAt(DateUtil.getCurrentTimeFilterFormat());
+        logRepository.save(logModel);
+    }
+
+    public void debug(String message, String type) {
+        LogModel logModel = new LogModel();
+        logModel.setMessage(message);
+        logModel.setLogLevel("DEBUG");
+        logModel.setCreatedAt(DateUtil.getCurrentTimeFilterFormat());
+        logModel.setEventType(type);
         logRepository.save(logModel);
     }
 
@@ -62,7 +70,7 @@ public class LogUtil {
         LogModel logModel = new LogModel();
         logModel.setMessage(message);
         logModel.setLogLevel("WARN");
-        logModel.setCreatedAt(new Date(System.currentTimeMillis()));
+        logModel.setCreatedAt(DateUtil.getCurrentTimeFilterFormat());
         logRepository.save(logModel);
     }
 
@@ -70,7 +78,7 @@ public class LogUtil {
         LogModel logModel = new LogModel();
         logModel.setMessage(message);
         logModel.setLogLevel("WARN");
-        logModel.setCreatedAt(new Date(System.currentTimeMillis()));
+        logModel.setCreatedAt(DateUtil.getCurrentTimeFilterFormat());
         logModel.setEventType(type);
         logRepository.save(logModel);
     }

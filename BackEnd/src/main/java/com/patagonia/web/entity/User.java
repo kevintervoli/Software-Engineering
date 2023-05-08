@@ -11,13 +11,12 @@ import java.util.Collections;
 
 @Entity
 @Table(name = "User")
-public class User implements UserDetails {
+public class User extends AuthenticationResponse implements UserDetails   {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-
 
     @Column(name = "Name")
     private String name;
@@ -31,7 +30,7 @@ public class User implements UserDetails {
     @Column(name = "Address")
     private String address;
 
-    @Column(name = "username")
+    @Column(name = "Username")
     private String username;
 
     @Column(name = "Password")
@@ -47,7 +46,7 @@ public class User implements UserDetails {
     private boolean enabled;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "Role_id")
     private Role role;
 
     public User() {}
@@ -172,5 +171,9 @@ public class User implements UserDetails {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getClassName() {
+        return "User";
     }
 }

@@ -1,11 +1,13 @@
 package com.patagonia.web.service;
 
 import com.patagonia.web.entity.*;
-import com.patagonia.web.entity.*;
+import com.patagonia.web.repository.AdminRepository;
 import com.patagonia.web.repository.RoleRepository;
 import com.patagonia.web.repository.UserRepository;
 import com.patagonia.web.util.LogUtil;
 import lombok.var;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -31,23 +33,28 @@ public class AuthenticateService implements UserDetailsService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final LogUtil logUtil;
+    private final AdminRepository adminRepository;
 
-    public AuthenticateService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager, LogUtil logUtil) {
+    public AuthenticateService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager, LogUtil logUtil, AdminRepository adminRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
         this.logUtil = logUtil;
+        this.adminRepository = adminRepository;
     }
 
 
-    public AuthenticationResponse register(UserRequest request) {
+    public AuthenticationResponse registerUser(UserRequest request) {
 
         boolean userExists = userRepository.findByUsername(request.getUsername())
                 .isPresent();
 
-        if (userExists) {
+        boolean adminExists = adminRepository.findByUsername(request.getUsername())
+                .isPresent();
+
+        if (userExists && adminExists) {
             logUtil.warn("username already taken");
             throw new IllegalStateException("username already taken");
         }
@@ -62,7 +69,7 @@ public class AuthenticateService implements UserDetailsService {
                 request.getStatus(),
                 request.getCreditScore(),
                 request.isEnabled(),
-                roleRepository.findById(request.getRoleId()).orElseThrow(() -> new UsernameNotFoundException("Role not found!"))
+                roleRepository.findByName("USER")
         );
 
         userRepository.save(user);
@@ -74,20 +81,18 @@ public class AuthenticateService implements UserDetailsService {
 
     }
 
-    public ResponseWrapper<T> createUser(UserRequest request, String token) {
+    public ResponseWrapper<T> createUser(UserRequest request) {
 
-        AuthenticationResponse auth = (AuthenticationResponse) jwtService.decodeToken(token).getContent().get(0);
+        boolean userExists = userRepository.findByUsername(request.getUsername())
+                .isPresent();
 
-        if(2 == auth.getRole().getId() && request.getRoleId() == 1){
-            return new ResponseWrapper<>(false, "You dont have authorization to make changes!");
-        }else {
-            boolean userExists = userRepository.findByUsername(request.getUsername())
-                    .isPresent();
+        boolean adminExists = adminRepository.findByUsername(request.getUsername())
+                .isPresent();
 
-            if (userExists) {
-                logUtil.warn("username already taken");
-                throw new IllegalStateException("username already taken");
-            }
+        if (userExists && adminExists) {
+            logUtil.warn("username already taken");
+            throw new IllegalStateException("username already taken");
+        }
 
             var user = new User(
                     request.getName(),
@@ -99,7 +104,7 @@ public class AuthenticateService implements UserDetailsService {
                     request.getStatus(),
                     request.getCreditScore(),
                     request.isEnabled(),
-                    roleRepository.findById(request.getRoleId()).orElseThrow(() -> new UsernameNotFoundException("Role not found!"))
+                    roleRepository.findByName("USER")
             );
 
             userRepository.save(user);
@@ -109,27 +114,47 @@ public class AuthenticateService implements UserDetailsService {
             List<AuthenticationResponse> content = new ArrayList<>();
             content.add(new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole()));
             return new ResponseWrapper<>(true, content);
+    }
+
+    public ResponseWrapper<T> createAdmin(AdminRequest request) {
+
+        boolean userExists = userRepository.findByUsername(request.getUsername())
+                .isPresent();
+
+        boolean adminExists = adminRepository.findByUsername(request.getUsername())
+                .isPresent();
+
+        if (userExists && adminExists) {
+            logUtil.warn("username already taken");
+            throw new IllegalStateException("username already taken");
         }
+
+        var admin = new Admin(
+                request.getName(),
+                request.getSurname(),
+                request.getUsername(),
+                passwordEncoder.encode(request.getPassword()),
+                request.getEmail(),
+                request.getAddress(),
+                request.getGender(),
+                request.getAge(),
+                roleRepository.findByName("ADMIN"),
+                request.isEnabled()
+        );
+
+        adminRepository.save(admin);
+
+        logUtil.info("User with username: " + admin.getUsername() + " has been registered successfully");
+        var jwtToken = jwtService.generateToken(admin.getUsername(), admin.getRole());
+        List<AuthenticationResponse> content = new ArrayList<>();
+        content.add(new AuthenticationResponse(admin.getUsername(), jwtToken, admin.getRole()));
+        return new ResponseWrapper<>(true, content);
     }
 
     public ResponseWrapper<List<UserResponse>>getAllUsers() {
 
         List<User> users = userRepository.findAll();
         List<UserResponse> response = new ArrayList<>();
-
-        /*
-
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.age = age;
-        this.email = email;
-        this.address = address;
-        this.status = status;
-        this.creditScore = creditScore;
-        this.enabled = enabled;
-        this.role = role;
-         */
 
         for (User user : users) {
             response.add(new UserResponse(
@@ -152,7 +177,23 @@ public class AuthenticateService implements UserDetailsService {
         return responseWrapper;
     }
 
-    public ResponseWrapper<T> authenticate(AuthenticationRequest request) {
+    public ResponseWrapper<T> authenticate(AuthenticationRequest request){
+        ResponseWrapper<T> responseAdmin = doAuth(request, adminRepository, Admin.class);
+        ResponseWrapper<T> responseUser = doAuth(request, userRepository, User.class);
+        if (responseUser.isStatus()){
+            logUtil.info("User with username: " + request.getUsername() + " has been authenticated successfully", "AUTHENTICATE");
+            return responseUser;
+        } else if (responseAdmin.isStatus()){
+            logUtil.info("Admin with username: " + request.getUsername() + " has been authenticated successfully", "AUTHENTICATE");
+            return responseAdmin;
+        } else {
+            logUtil.warn("Invalid username or password", "AUTHENTICATE");
+            return new ResponseWrapper<>(false, "Invalid username or password");
+        }
+    }
+
+
+    public <U extends AuthenticationResponse> ResponseWrapper<T> doAuth(AuthenticationRequest request, JpaSpecificationExecutor<U> userRepository, Class<U> userClass) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -164,11 +205,12 @@ public class AuthenticateService implements UserDetailsService {
             return new ResponseWrapper<>(false, "Invalid username or password");
         }
 
-        User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("No user " +
-                        "Found with username : " + request.getUsername()));
+        U user = userRepository.findOne((root, query, cb) -> cb.equal(root.get("username"), request.getUsername())).isPresent() ?
+                userRepository.findOne((root, query, cb) -> cb.equal(root.get("username"), request.getUsername())).get() : null;
 
-        if (!user.isEnabled()) {
+        if (user == null) {
+            return new ResponseWrapper<>(false, "User not found");
+        }else if(!user.isEnabled()) {
             return new ResponseWrapper<>(false, "User is not enabled");
         }
         var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
@@ -177,6 +219,7 @@ public class AuthenticateService implements UserDetailsService {
         content.add(authenticationResponse);
         return new ResponseWrapper<>(true, "User authenticated successfully", content);
     }
+
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
         return Collections.singletonList(new SimpleGrantedAuthority(role));

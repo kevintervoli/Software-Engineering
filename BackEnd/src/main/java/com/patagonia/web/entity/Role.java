@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.List;
 
-
-
 @Entity
 @Table(name = "role")
 public class Role {
@@ -56,12 +54,21 @@ public class Role {
         this.users = users;
     }
 
+    public List<Admin> getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(List<Admin> admin) {
+        this.admin = admin;
+    }
+
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", users=" + users +
+                ", admin=" + admin +
                 '}';
     }
 }

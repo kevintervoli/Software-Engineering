@@ -5,15 +5,17 @@ import com.patagonia.web.filter.search.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
 import jakarta.persistence.criteria.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GeneralSpecification<T> implements Specification<T> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3810596400215022908L;
 	private List<SearchCriteria> list;
@@ -63,37 +65,41 @@ public class GeneralSpecification<T> implements Specification<T> {
 				predicates.add(builder.like(builder.upper(app.get(criteria.getKey())),
 						"%" + criteria.getValue().toString().toUpperCase() + "%"));
 			} else if (criteria.getOperation().equals(SearchOperation.EQUAL_DATE)) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.ENGLISH);
+				formatter.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
 				String date = criteria.getValue().toString();
-				LocalDate localDate = LocalDate.parse(date, formatter);
+				Date localDate = null;
+				try {
+					localDate = formatter.parse(date);
+				} catch (ParseException e) {
+					throw new RuntimeException(e);
+				}
 				predicates.add(builder.equal(root.get(criteria.getKey()), localDate));
 			} else if (criteria.getOperation().equals(SearchOperation.MATCH_START_DATE)) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.ENGLISH);
+				formatter.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
 				String date = criteria.getValue().toString();
-				LocalDate localDate = LocalDate.parse(date, formatter);
-
-				predicates.add(builder.greaterThanOrEqualTo(
-						builder.function("DAY", Integer.class, root.get(criteria.getKey())),
-						localDate.getDayOfMonth()));
-
-				predicates.add(builder.greaterThanOrEqualTo(
-						builder.function("MONTH", Integer.class, root.get(criteria.getKey())),
-						localDate.getMonthValue()));
+				Date localDate = null;
+				try {
+					localDate = formatter.parse(date);
+				} catch (ParseException e) {
+					throw new RuntimeException(e);
+				}
+				predicates.add(builder.greaterThanOrEqualTo(root.get(criteria.getKey()), localDate));
 
 			} else if (criteria.getOperation().equals(SearchOperation.MATCH_END_DATE)) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss", Locale.ENGLISH);
+				formatter.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
 				String date = criteria.getValue().toString();
-				LocalDate localDate = LocalDate.parse(date, formatter);
-
-				predicates.add(
-						builder.lessThanOrEqualTo(builder.function("DAY", Integer.class, root.get(criteria.getKey())),
-								localDate.getDayOfMonth()));
-
-				predicates.add(
-						builder.lessThanOrEqualTo(builder.function("MONTH", Integer.class, root.get(criteria.getKey())),
-								localDate.getMonthValue()));
-
-			} else if (criteria.getOperation().equals(SearchOperation.MATCH)) {
+				Date localDate = null;
+				try {
+					localDate = formatter.parse(date);
+				} catch (ParseException e) {
+					throw new RuntimeException(e);
+				}
+				predicates.add(builder.lessThanOrEqualTo(root.get(criteria.getKey()), localDate));
+			}
+			else if (criteria.getOperation().equals(SearchOperation.MATCH)) {
 				predicates.add(builder.like(builder.lower(root.get(criteria.getKey())),
 						"%" + criteria.getValue().toString().toLowerCase() + "%"));
 			} else if (criteria.getOperation().equals(SearchOperation.MATCH_END)) {

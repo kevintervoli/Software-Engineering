@@ -37,7 +37,7 @@ public class FilterService {
 
 
     public <T> ResponseWrapper<T> getData(Filters filters, Class<T> clazz, JpaSpecificationExecutor<T> repository) {
-        logUtil.info("Fetching data for class: " + clazz.getSimpleName());
+
         try {
             PaginationPOJO pagination = filters.getPagination();
 
@@ -70,18 +70,6 @@ public class FilterService {
         logUtil.info("Fetching user with ID: " + id);
         try {
 
-            /*
-                    this.name = name;
-        this.age = age;
-        this.email = email;
-        this.address = address;
-        this.username = username;
-        this.password = password;
-        this.status = status;
-        this.creditScore = creditScore;
-        this.enabled = enabled;
-        this.role = role;
-             */
             User user = userRepository.findById(id).orElseThrow( () -> new Exception("User not found"));
             UserResponse userResponse = new UserResponse();
             userResponse.setId(user.getId());
@@ -108,7 +96,6 @@ public class FilterService {
 
     public ResponseWrapper<?> getAllUsers(Filters filters, Class<User> userClass, UserRepository userRepository) {
 
-        logUtil.info("Fetching all users");
         try {
 
             List<?> userList = getData(filters, userClass, userRepository).getContent();
