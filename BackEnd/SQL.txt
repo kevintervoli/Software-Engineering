@@ -1,114 +1,218 @@
-CREATE TABLE Area
-(
-  Area_Id INT NOT NULL,
-  No_Properties INT NOT NULL,
-  Location varchar(255) NOT NULL,
-  PRIMARY KEY (Area_Id)
-);
+-- TABLES
 
-CREATE TABLE Admin
-(
-  ID INT NOT NULL,
-  Name varchar(255) NOT NULL,
-  Surname varchar(255) NOT NULL,
-  Username varchar(255) NOT NULL,
-  Password varchar(255) NOT NULL,
-  Email varchar(255) NOT NULL,
-  Address varchar(255) NOT NULL,
-  Gender varchar(255) NOT NULL,
-  Age INT NOT NULL,
-  PRIMARY KEY (ID)
-);
+-- patagonia.admin definition
 
-CREATE TABLE Auction
-(
-  Auction_ID INT NOT NULL,
-  Auction_Date date NOT NULL,
-  Auction_Venue varchar(255) NOT NULL,
-  Auction_InitialPrice INT NOT NULL,
-  Auctioneer varchar(255) NOT NULL,
-  PRIMARY KEY (Auction_ID)
-);
+CREATE TABLE `admin` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) NOT NULL,
+  `Surname` varchar(255) NOT NULL,
+  `Username` varchar(255) NOT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  `Gender` varchar(255) NOT NULL,
+  `Age` int NOT NULL,
+  `Role_id` int NOT NULL,
+  `Enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `admin_FK` (`Role_id`),
+  CONSTRAINT `admin_FK` FOREIGN KEY (`Role_id`) REFERENCES `role` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE User
-(
-  Name varchar(255) NOT NULL,
-  Age INT NOT NULL,
-  Email varchar(255) NOT NULL,
-  Address varchar(255) NOT NULL,
-  username varchar(255) NOT NULL,
-  Password varchar(255) NOT NULL,
-  Status INT NOT NULL,
-  ID INT NOT NULL,
-  Credit_Score INT NOT NULL,
-  PRIMARY KEY (ID),
-);
+-- patagonia.agent definition
 
-CREATE TABLE Agent
-(
-  Agent_ID INT NOT NULL,
-  Salary INT NOT NULL,
-  Name varchar(255) NOT NULL,
-  Surname varchar(255) NOT NULL,
-  Username varchar(255) NOT NULL,
-  Password varchar(255) NOT NULL,
-  Email varchar(255) NOT NULL,
-  Address varchar(255) NOT NULL,
-  Gender varchar(255) NOT NULL,
-  Age INT NOT NULL,
-  ID INT NOT NULL,
-  Auction_ID INT,
-  PRIMARY KEY (Agent_ID),
-  FOREIGN KEY (Auction_ID) REFERENCES Auction(Auction_ID)
-);
+CREATE TABLE `agent` (
+  `Agent_ID` int NOT NULL AUTO_INCREMENT,
+  `Salary` int NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `Surname` varchar(255) NOT NULL,
+  `Username` varchar(255) NOT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  `Gender` varchar(255) NOT NULL,
+  `Age` int NOT NULL,
+  `ID` int NOT NULL,
+  `Auction_ID` int DEFAULT NULL,
+  `Enabled` tinyint(1) NOT NULL,
+  `Role_Id` int NOT NULL,
+  PRIMARY KEY (`Agent_ID`),
+  KEY `Auction_ID` (`Auction_ID`),
+  KEY `agent_FK` (`Role_Id`),
+  CONSTRAINT `agent_FK` FOREIGN KEY (`Role_Id`) REFERENCES `role` (`Id`),
+  CONSTRAINT `agent_ibfk_1` FOREIGN KEY (`Auction_ID`) REFERENCES `auction` (`Auction_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE Property
-(
-  Property_Id INT NOT NULL,
-  Property_Name varchar(255) NOT NULL,
-  Description varchar(255) NOT NULL,
-  Nr_Bedrooms INT NOT NULL,
-  Nr_Bathrooms INT NOT NULL,
-  Area varchar(255) NOT NULL,
-  Image blob NOT NULL,
-  Price INT NOT NULL,
-  No_Garages INT NOT NULL,
-  Stories INT NOT NULL,
-  Status INT NOT NULL,
-  Agent_ID INT NOT NULL,
-  Area_Id INT NOT NULL,
-  ID INT,
-  Auction_ID INT,
-  PRIMARY KEY (Property_Id),
-  FOREIGN KEY (Agent_ID) REFERENCES Agent(Agent_ID),
-  FOREIGN KEY (Area_Id) REFERENCES Area(Area_Id),
-  FOREIGN KEY (Auction_ID) REFERENCES Auction(Auction_ID)
-);
+-- patagonia.agent_area definition
 
-CREATE TABLE Agent_Area
-(
-  RelationID INT NOT NULL,
-  Agent_ID INT NOT NULL,
-  Area_Id INT NOT NULL,
-  FOREIGN KEY (Agent_ID) REFERENCES Agent(Agent_ID),
-  FOREIGN KEY (Area_Id) REFERENCES Area(Area_Id)
-);
+CREATE TABLE `agent_area` (
+  `RelationID` int NOT NULL,
+  `Agent_ID` int NOT NULL,
+  `Area_Id` int NOT NULL,
+  KEY `Agent_ID` (`Agent_ID`),
+  KEY `Area_Id` (`Area_Id`),
+  CONSTRAINT `agent_area_ibfk_1` FOREIGN KEY (`Agent_ID`) REFERENCES `agent` (`Agent_ID`),
+  CONSTRAINT `agent_area_ibfk_2` FOREIGN KEY (`Area_Id`) REFERENCES `area` (`Area_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE Appointment
-(
-  Date date NOT NULL,
-  Venue varchar(255) NOT NULL,
-  ID INT NOT NULL,
-  Agent_ID INT NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (Agent_ID) REFERENCES Agent(Agent_ID),
- 
-);
+-- patagonia.appointment definition
 
-CREATE TABLE Participants
-(
-  ID INT NOT NULL,
-  Auction_ID INT NOT NULL,
-  PRIMARY KEY (ID, Auction_ID),
-  FOREIGN KEY (Auction_ID) REFERENCES Auction(Auction_ID)
-);
+CREATE TABLE `appointment` (
+  `Date` date NOT NULL,
+  `Venue` varchar(255) NOT NULL,
+  `ID` int NOT NULL,
+  `Agent_ID` int NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `Agent_ID` (`Agent_ID`),
+  CONSTRAINT `appointment_ibfk_1` FOREIGN KEY (`Agent_ID`) REFERENCES `agent` (`Agent_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- patagonia.area definition
+
+CREATE TABLE `area` (
+  `Area_Id` int NOT NULL,
+  `No_Properties` int NOT NULL,
+  `Location` varchar(255) NOT NULL,
+  PRIMARY KEY (`Area_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- patagonia.auction definition
+
+CREATE TABLE `auction` (
+  `Auction_ID` int NOT NULL,
+  `Auction_Date` date NOT NULL,
+  `Auction_Venue` varchar(255) NOT NULL,
+  `Auction_InitialPrice` int NOT NULL,
+  `Auctioneer` varchar(255) NOT NULL,
+  PRIMARY KEY (`Auction_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- patagonia.log definition
+
+CREATE TABLE `log` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `message` varchar(225) NOT NULL,
+  `log_level` varchar(225) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `evnt_type` varchar(225) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- patagonia.participants definition
+
+CREATE TABLE `participants` (
+  `ID` int NOT NULL,
+  `Auction_ID` int NOT NULL,
+  PRIMARY KEY (`ID`,`Auction_ID`),
+  KEY `Auction_ID` (`Auction_ID`),
+  CONSTRAINT `participants_ibfk_1` FOREIGN KEY (`Auction_ID`) REFERENCES `auction` (`Auction_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- patagonia.property definition
+
+CREATE TABLE `property` (
+  `Property_Id` int NOT NULL,
+  `Property_Name` varchar(255) NOT NULL,
+  `Description` varchar(255) NOT NULL,
+  `Nr_Bedrooms` int NOT NULL,
+  `Nr_Bathrooms` int NOT NULL,
+  `Area` varchar(255) NOT NULL,
+  `Image` blob NOT NULL,
+  `Price` int NOT NULL,
+  `No_Garages` int NOT NULL,
+  `Stories` int NOT NULL,
+  `Status` int NOT NULL,
+  `Agent_ID` int NOT NULL,
+  `Area_Id` int NOT NULL,
+  `ID` int DEFAULT NULL,
+  `Auction_ID` int DEFAULT NULL,
+  PRIMARY KEY (`Property_Id`),
+  KEY `Agent_ID` (`Agent_ID`),
+  KEY `Area_Id` (`Area_Id`),
+  KEY `Auction_ID` (`Auction_ID`),
+  CONSTRAINT `property_ibfk_2` FOREIGN KEY (`Area_Id`) REFERENCES `area` (`Area_Id`),
+  CONSTRAINT `property_ibfk_3` FOREIGN KEY (`Auction_ID`) REFERENCES `auction` (`Auction_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- patagonia.`role` definition
+
+CREATE TABLE `role` (
+  `Id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- patagonia.`user` definition
+
+CREATE TABLE `user` (
+  `Name` varchar(255) NOT NULL,
+  `Age` int NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  `Username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Password` varchar(255) NOT NULL,
+  `Status` int NOT NULL,
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Credit_Score` int NOT NULL,
+  `Role_id` int NOT NULL,
+  `Enabled` tinyint(1) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `user_FK` (`Role_id`),
+  CONSTRAINT `user_FK` FOREIGN KEY (`Role_id`) REFERENCES `role` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+###########################################################################################
+
+-- VIEWS
+
+-- patagonia.combined_users source
+
+create or replace
+algorithm = UNDEFINED view `combined_users` as
+select
+    `user`.`ID` as `ID`,
+    `user`.`Name` as `Name`,
+    null as `Surname`,
+    `user`.`Username` as `Username`,
+    `user`.`Password` as `Password`,
+    `user`.`Email` as `Email`,
+    `user`.`Address` as `Address`,
+    null as `Gender`,
+    `user`.`Age` as `Age`,
+    null as `Auction_ID`,
+    `user`.`Role_id` as `Role_id`,
+    `user`.`Enabled` as `Enabled`
+from
+    `user`
+union all
+select
+    `admin`.`ID` as `ID`,
+    `admin`.`Name` as `Name`,
+    `admin`.`Surname` as `Surname`,
+    `admin`.`Username` as `Username`,
+    `admin`.`Password` as `Password`,
+    `admin`.`Email` as `Email`,
+    `admin`.`Address` as `Address`,
+    `admin`.`Gender` as `Gender`,
+    `admin`.`Age` as `Age`,
+    null as `Auction_ID`,
+    `admin`.`Role_id` as `Role_id`,
+    `admin`.`Enabled` as `Enabled`
+from
+    `admin`
+union all
+select
+    `agent`.`ID` as `ID`,
+    `agent`.`Name` as `Name`,
+    `agent`.`Surname` as `Surname`,
+    `agent`.`Username` as `Username`,
+    `agent`.`Password` as `Password`,
+    `agent`.`Email` as `Email`,
+    `agent`.`Address` as `Address`,
+    `agent`.`Gender` as `Gender`,
+    `agent`.`Age` as `Age`,
+    `agent`.`Auction_ID` as `Auction_ID`,
+    `agent`.`Role_Id` as `Role_id`,
+    `agent`.`Enabled` as `Enabled`
+from
+    `agent`;

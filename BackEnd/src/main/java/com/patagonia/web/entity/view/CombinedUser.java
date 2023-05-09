@@ -6,9 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 @Entity
 @Table(name = "combined_users")
@@ -16,7 +14,7 @@ public class CombinedUser  extends AuthenticationResponse implements UserDetails
 
     @Id
     @Column(name = "ID")
-    private int id;
+    private Integer id;
 
     @Column(name = "Name")
     private String name;
@@ -159,7 +157,9 @@ public class CombinedUser  extends AuthenticationResponse implements UserDetails
         if (roleId == 1) {
             return "ADMIN";
         } else if (roleId == 2) {
-            return "ROLE_USER";
+            return "USER";
+        } else if (roleId == 3) {
+            return "AGENT";
         }
         return null;
     }
