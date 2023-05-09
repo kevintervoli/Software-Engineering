@@ -107,7 +107,7 @@ public class JwtService {
         String username = claims.getSubject();
 
         List<AuthenticationResponse> list = new ArrayList<>();
-        list.add(new AuthenticationResponse(username, jwt, new Role(roleId, roleName)));
+        list.add(new AuthenticationResponse(username, jwt, new Role(roleId, roleName), true) );
 
         return new ResponseWrapper<>(true, list);
     }

@@ -89,7 +89,7 @@ public class AuthenticateService implements UserDetailsService {
         boolean adminExists = adminRepository.findByUsername(request.getUsername())
                 .isPresent();
 
-        if (userExists && adminExists) {
+        if (userExists || adminExists) {
             logUtil.warn("username already taken");
             throw new IllegalStateException("username already taken");
         }
@@ -112,7 +112,7 @@ public class AuthenticateService implements UserDetailsService {
             logUtil.info("User with username: " + user.getUsername() + " has been registered successfully");
             var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
             List<AuthenticationResponse> content = new ArrayList<>();
-            content.add(new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole()));
+            content.add(new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole(), true));
             return new ResponseWrapper<>(true, content);
     }
 
@@ -124,7 +124,7 @@ public class AuthenticateService implements UserDetailsService {
         boolean adminExists = adminRepository.findByUsername(request.getUsername())
                 .isPresent();
 
-        if (userExists && adminExists) {
+        if (userExists || adminExists) {
             logUtil.warn("username already taken");
             throw new IllegalStateException("username already taken");
         }
@@ -147,7 +147,7 @@ public class AuthenticateService implements UserDetailsService {
         logUtil.info("User with username: " + admin.getUsername() + " has been registered successfully");
         var jwtToken = jwtService.generateToken(admin.getUsername(), admin.getRole());
         List<AuthenticationResponse> content = new ArrayList<>();
-        content.add(new AuthenticationResponse(admin.getUsername(), jwtToken, admin.getRole()));
+        content.add(new AuthenticationResponse(admin.getUsername(), jwtToken, admin.getRole(), true));
         return new ResponseWrapper<>(true, content);
     }
 
@@ -177,7 +177,7 @@ public class AuthenticateService implements UserDetailsService {
         return responseWrapper;
     }
 
-    public ResponseWrapper<T> authenticate(AuthenticationRequest request){
+    public ResponseWrapper<T>authenticate(AuthenticationRequest request){
         ResponseWrapper<T> responseAdmin = doAuth(request, adminRepository, Admin.class);
         ResponseWrapper<T> responseUser = doAuth(request, userRepository, User.class);
         if (responseUser.isStatus()){
@@ -214,7 +214,7 @@ public class AuthenticateService implements UserDetailsService {
             return new ResponseWrapper<>(false, "User is not enabled");
         }
         var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole());
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole(), user.isEnabled());
         List<AuthenticationResponse> content = new ArrayList<>();
         content.add(authenticationResponse);
         return new ResponseWrapper<>(true, "User authenticated successfully", content);

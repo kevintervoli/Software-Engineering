@@ -48,9 +48,6 @@ public class CombinedUser  extends AuthenticationResponse implements UserDetails
     @Column(name = "Enabled")
     private boolean enabled;
 
-    @Column(name = "role")
-    private String roles;
-
     public int getId() {
         return id;
     }
@@ -100,7 +97,7 @@ public class CombinedUser  extends AuthenticationResponse implements UserDetails
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.unmodifiableList(Arrays.asList(new SimpleGrantedAuthority(roles.toUpperCase())));
+        return java.util.List.of(new SimpleGrantedAuthority(getRoles()));
     }
     public String getPassword() {
         return password;
@@ -159,10 +156,12 @@ public class CombinedUser  extends AuthenticationResponse implements UserDetails
     }
 
     public String getRoles() {
-        return roles;
+        if (roleId == 1) {
+            return "ADMIN";
+        } else if (roleId == 2) {
+            return "ROLE_USER";
+        }
+        return null;
     }
 
-    public void setRole(String role) {
-        this.roles = role;
-    }
 }
