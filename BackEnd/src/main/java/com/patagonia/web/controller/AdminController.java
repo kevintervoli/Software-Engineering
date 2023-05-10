@@ -11,6 +11,7 @@ import com.patagonia.web.repository.UserRepository;
 import com.patagonia.web.service.AuthenticateService;
 import com.patagonia.web.service.FilterService;
 import org.apache.poi.ss.formula.functions.T;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -39,6 +40,11 @@ public class AdminController {
     @PostMapping("/createAdmin")
     public ResponseWrapper<T> createAdmin(@RequestBody AdminRequest request) {
         return authenticateService.createAdmin(request);
+    }
+
+    @PostMapping("/createAgent")
+    public ResponseWrapper<T> createAgent(@RequestBody AgentRequest request) {
+        return authenticateService.createAgent(request);
     }
 
     @PostMapping("/getAllUsers")

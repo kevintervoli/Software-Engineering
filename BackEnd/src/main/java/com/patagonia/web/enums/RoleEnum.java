@@ -6,6 +6,6 @@ public enum RoleEnum {
 
     ADMIN,
 
-    SYSADMIN
+    AGENT
 
 }
