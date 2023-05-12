@@ -31,15 +31,6 @@ public class CombinedUser  extends AuthenticationResponse implements UserDetails
     @Column(name = "Email")
     private String email;
 
-    @Column(name = "Address")
-    private String address;
-
-    @Column(name = "Gender")
-    private String gender;
-
-    @Column(name = "Age")
-    private int age;
-
     @Column(name = "Role_id")
     private int roleId;
 
@@ -113,29 +104,6 @@ public class CombinedUser  extends AuthenticationResponse implements UserDetails
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public int getRoleId() {
         return roleId;

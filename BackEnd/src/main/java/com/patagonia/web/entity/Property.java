@@ -1,6 +1,6 @@
 package com.patagonia.web.entity;
+
 import jakarta.persistence.*;
-import java.sql.Blob;
 
 @Entity
 @Table(name = "Property")

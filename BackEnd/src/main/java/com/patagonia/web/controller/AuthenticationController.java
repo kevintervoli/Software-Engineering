@@ -27,6 +27,12 @@ public class AuthenticationController {
         return new ResponseWrapper<>(true, "User created");
     }
 
+    @PostMapping("/registerAdmin")
+    public ResponseWrapper<AuthenticationResponse> registerAdmin(@RequestBody AdminRequest request) {
+        AuthenticationResponse response = authenticateService.registerAdmin(request);
+        return new ResponseWrapper<>(true, "Admin created");
+    }
+
     @PostMapping("/authenticate")
     public ResponseWrapper<T> authenticate(@RequestBody AuthenticationRequest request) {
         return authenticateService.authenticate(request);

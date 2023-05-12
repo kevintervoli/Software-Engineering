@@ -4,26 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1ab561e-5750-460d-9e7a-d139c44d3ec2" name="Changes" comment="auth fix">
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Agent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/AgentArea.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/AgentRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Area.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Auction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Property.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/repository/AgentRepository.java" afterDir="false" />
+    <list default="true" id="d1ab561e-5750-460d-9e7a-d139c44d3ec2" name="Changes" comment="Db and agent fix">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/ApplicationConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/AuthenticationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/Role.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_3_2023_11_35_PM__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/SQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/SQL.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/SQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/Patagonia_DB.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/controller/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/AgentRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/AgentRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/Property.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/view/CombinedUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/entity/view/CombinedUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/enums/RoleEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/enums/RoleEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/software/engineering/back/BackApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/com/software/engineering/back/controller/LoginController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/service/JwtService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/service/JwtService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/controller/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/controller/AuthenticationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/controller/AuthenticationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/entity/Admin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/enums/RoleEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/enums/RoleEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/service/AuthenticateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/target/classes/com/patagonia/web/service/AuthenticateService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,28 +126,28 @@
       <workItem from="1683188621158" duration="637000" />
       <workItem from="1683190219261" duration="15134000" />
       <workItem from="1683559707452" duration="1555000" />
-      <workItem from="1683643523694" duration="9707000" />
+      <workItem from="1683643523694" duration="10211000" />
+      <workItem from="1683705112748" duration="618000" />
+      <workItem from="1683879137223" duration="6943000" />
     </task>
+    <task id="LOCAL-00001" summary="Db and agent fix">
+      <created>1683664307379</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683664307380</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Db and agent fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Db and agent fix" />
+  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java</url>
-          <line>229</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BackEnd/src/main/java/com/patagonia/web/service/AuthenticateService.java</url>
-          <line>250</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="com.patagonia.web.entity.User" memberName="enabled" />
