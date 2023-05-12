@@ -13,8 +13,8 @@ Tips in how to run the project:
     - To test the backend you can use Postman or any other tool to test the endpoints
     - First you need to register a admin, then login and you will get a token
     - With the admin authority you can create a new user or a new agent and then login with that user to get a new token
-    - The postman documentation will be available soon...
-
+    - Postman Documentation(Unfinished): https://documenter.getpostman.com/view/26420550/2s93ecw9yi
+    
 -> Frontend:
    
     coming soon...
