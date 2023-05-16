@@ -13,7 +13,7 @@ public class AgentRequest {
     private String address;
     private String gender;
     private Integer age;
-    private Integer id;
+    private String idNumber;
     private Integer roleId;
     private boolean enabled;
 
@@ -89,12 +89,12 @@ public class AgentRequest {
         this.age = age;
     }
 
-    public Integer getId() {
-        return id;
+    public String getId() {
+        return idNumber;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String idNumber) {
+        this.idNumber = idNumber;
     }
 
 

@@ -75,7 +75,7 @@ public class AuthenticateService implements UserDetailsService {
                 request.getStatus(),
                 request.getCreditScore(),
                 request.isEnabled(),
-                roleRepository.findByName("USER")
+                roleRepository.findByName(RoleEnum.USER.name())
         );
 
         userRepository.save(user);
@@ -85,6 +85,42 @@ public class AuthenticateService implements UserDetailsService {
         var jwtToken = jwtService.generateToken(user.getUsername(), user.getRole());
         return new AuthenticationResponse(user.getUsername(), jwtToken, user.getRole());
 
+    }
+
+    public AuthenticationResponse registerAdmin(AdminRequest request) {
+
+            boolean userExists = userRepository.findByUsername(request.getUsername())
+                    .isPresent();
+
+            boolean adminExists = adminRepository.findByUsername(request.getUsername())
+                    .isPresent();
+
+            boolean agentExists = agentRepository.findByUsername(request.getUsername())
+                    .isPresent();
+
+            if (userExists || adminExists || agentExists) {
+                logUtil.warn("username already taken");
+                throw new IllegalStateException("username already taken");
+            }
+
+            var admin = new Admin(
+                    request.getName(),
+                    request.getSurname(),
+                    request.getUsername(),
+                    passwordEncoder.encode(request.getPassword()),
+                    request.getEmail(),
+                    request.getAddress(),
+                    request.getGender(),
+                    request.getAge(),
+                    roleRepository.findByName(RoleEnum.ADMIN.name()),
+                    request.isEnabled()
+            );
+
+            adminRepository.save(admin);
+
+            logUtil.info("User with username: " + admin.getUsername() + " has been registered successfully");
+            var jwtToken = jwtService.generateToken(admin.getUsername(), admin.getRole());
+            return new AuthenticationResponse(admin.getUsername(), jwtToken, admin.getRole());
     }
 
     public ResponseWrapper<T> createUser(UserRequest request) {
@@ -113,7 +149,7 @@ public class AuthenticateService implements UserDetailsService {
                     request.getStatus(),
                     request.getCreditScore(),
                     request.isEnabled(),
-                    roleRepository.findByName("USER")
+                    roleRepository.findByName(RoleEnum.USER.name())
             );
 
             userRepository.save(user);
@@ -150,7 +186,7 @@ public class AuthenticateService implements UserDetailsService {
                 request.getAddress(),
                 request.getGender(),
                 request.getAge(),
-                roleRepository.findByName("ADMIN"),
+                roleRepository.findByName(RoleEnum.ADMIN.name()),
                 request.isEnabled()
         );
 
@@ -348,6 +384,7 @@ public class AuthenticateService implements UserDetailsService {
         List<Role> roles = roleRepository.findAll();
         return new ResponseWrapper<>(true, "The list with roles is retrived.", roles, roles.size());
     }
+
 
 
 }

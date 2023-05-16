@@ -1,0 +1,187 @@
+-------------------- Patagonia database --------------------
+
+
+-- Step 1 -> Create Role table
+
+CREATE TABLE patagonia2.`Role` (
+    `Id` INT(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- Step 2 -> Insert the roles (USER, ADMIN, AGENT)
+--           Execute one by one!
+
+insert into patagonia2.`role` (Id, name)
+values (1, "ADMIN")
+
+insert into patagonia2.`role` (Id, name)
+values (2, "USER")
+
+insert into patagonia2.`role` (Id, name)
+values (3, "AGENT")
+
+
+-- Step 3 -> Create Admin table
+
+CREATE TABLE patagonia2.`Admin` (
+    `ID` INT(11) NOT NULL AUTO_INCREMENT,
+    `Name` VARCHAR(255) DEFAULT NULL,
+    `Surname` VARCHAR(255) DEFAULT NULL,
+    `Username` VARCHAR(255) NOT NULL,
+    `Password` VARCHAR(255) NOT NULL,
+    `Email` VARCHAR(255) DEFAULT NULL,
+    `Address` VARCHAR(255) DEFAULT NULL,
+    `Gender` VARCHAR(255) DEFAULT NULL,
+    `Age` INT(11) NOT NULL,
+    `Role_id` INT(11),
+    `Enabled` BOOLEAN NOT NULL,
+    PRIMARY KEY (`ID`),
+    FOREIGN KEY (`Role_id`) REFERENCES `Role`(`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- Step 4 -> Create User table
+
+CREATE TABLE patagonia2.`User` (
+    `ID` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `Name` VARCHAR(255) DEFAULT NULL,
+    `Age` INT(11) NOT NULL,
+    `Email` VARCHAR(255) DEFAULT NULL,
+    `Address` VARCHAR(255) DEFAULT NULL,
+    `Username` VARCHAR(255) NOT NULL,
+    `Password` VARCHAR(255) NOT NULL,
+    `Status` INT(11) NOT NULL,
+    `Credit_Score` INT(11) NOT NULL,
+    `Enabled` BOOLEAN NOT NULL,
+    `Role_id` INT(11),
+    PRIMARY KEY (`ID`),
+    FOREIGN KEY (`Role_id`) REFERENCES `Role`(`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Step 5 -> Create Auction table and insert a record for testing
+
+CREATE TABLE patagonia2.`Auction` (
+    `Auction_ID` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `Auction_Date` DATE NOT NULL,
+    `Auction_Venue` VARCHAR(255) NOT NULL,
+    `Auction_InitialPrice` INT(11) NOT NULL,
+    `Auctioneer` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`Auction_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO patagonia2.`Auction` (Auction_Date, Auction_Venue, Auction_InitialPrice, Auctioneer)
+VALUES ('2023-06-01', 'Auction1', 500, 'Customer1');
+
+
+-- Step 5 -> Create Agent table
+
+CREATE TABLE patagonia2.`Agent` (
+    `Agent_ID` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `Salary` INT(11),
+    `Name` VARCHAR(255),
+    `Surname` VARCHAR(255),
+    `Username` VARCHAR(255),
+    `Password` VARCHAR(255),
+    `Email` VARCHAR(255),
+    `Address` VARCHAR(255),
+    `Gender` VARCHAR(255),
+    `Age` INT(11),
+    `Id_Number` VARCHAR(255),
+    `Auction_ID` bigint,
+    `Role_id` INT(11),
+    `Enabled` BOOLEAN,
+    PRIMARY KEY (`Agent_ID`),
+    FOREIGN KEY (`Auction_ID`) REFERENCES `Auction`(`Auction_ID`),
+    FOREIGN KEY (`Role_id`) REFERENCES `Role`(`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- Step 6 -> Create the view that allows us to gruop all type of user
+
+create or replace
+algorithm = UNDEFINED view patagonia2.`combined_users` as
+select
+    `user`.`ID` as `ID`,
+    `user`.`Name` as `Name`,
+     null as `Surname`,
+    `user`.`Username` as `Username`,
+    `user`.`Password` as `Password`,
+    `user`.`Email` as `Email`,
+    `user`.`Role_id` as `Role_id`,
+    `user`.`Enabled` as `Enabled`
+from
+    patagonia2.`user`
+union all
+select
+    `admin`.`ID` as `ID`,
+    `admin`.`Name` as `Name`,
+    `admin`.`Surname` as `Surname`,
+    `admin`.`Username` as `Username`,
+    `admin`.`Password` as `Password`,
+    `admin`.`Email` as `Email`,
+    `admin`.`Role_id` as `Role_id`,
+    `admin`.`Enabled` as `Enabled`
+from
+    patagonia2.`admin`
+union all
+select
+    `agent`.`Agent_ID` as `ID`,
+    `agent`.`Name` as `Name`,
+    `agent`.`Surname` as `Surname`,
+    `agent`.`Username` as `Username`,
+    `agent`.`Password` as `Password`,
+    `agent`.`Email` as `Email`,
+    `agent`.`Role_Id` as `Role_id`,
+    `agent`.`Enabled` as `Enabled`
+from
+    patagonia2.`agent`;
+
+
+-- Step 7 -> Create Log table
+
+CREATE TABLE patagonia2.`log` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `message` varchar(225) NOT NULL,
+  `log_level` varchar(225) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `evnt_type` varchar(225) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+-- Step 8 -> Create Area table
+
+CREATE TABLE  patagonia2.`Area` (
+    `Area_Id` INT(11) NOT NULL AUTO_INCREMENT,
+    `No_Properties` INT(11),
+    `Location` VARCHAR(255),
+    PRIMARY KEY (`Area_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- Step 9 -> Create Property table
+
+CREATE TABLE patagonia2.`Property` (
+    `Property_Id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `Property_Name` VARCHAR(255),
+    `Description` VARCHAR(255),
+    `Nr_Bedrooms` INT(11),
+    `Nr_Bathrooms` INT(11),
+    `Area` VARCHAR(255),
+    `Image` BLOB,
+    `Price` INT(11),
+    `No_Garages` INT(11),
+    `Stories` INT(11),
+    `Status` INT(11),
+    `Agent_ID` BIGINT(20),
+    `Area_Id` INT(11),
+    `ID` INT(11),
+    `Auction_ID` BIGINT(20),
+    PRIMARY KEY (`Property_Id`),
+    FOREIGN KEY (`Agent_ID`) REFERENCES `Agent`(`Agent_ID`),
+    FOREIGN KEY (`Area_Id`) REFERENCES `Area`(`Area_Id`),
+    FOREIGN KEY (`Auction_ID`) REFERENCES `Auction`(`Auction_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+

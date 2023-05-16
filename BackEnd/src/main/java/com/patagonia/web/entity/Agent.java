@@ -45,8 +45,8 @@ public class Agent  extends AuthenticationResponse implements UserDetails {
     @Column(name = "Age")
     private Integer age;
 
-    @Column(name = "ID")
-    private Integer id;
+    @Column(name = "Id_Number")
+    private String idNumber;
 
     @ManyToOne
     @JoinColumn(name = "Auction_ID", referencedColumnName = "Auction_ID")
@@ -161,12 +161,11 @@ public class Agent  extends AuthenticationResponse implements UserDetails {
         this.age = age;
     }
 
-    public Integer getId() {
-        return id;
+    public String getId() {
+        return idNumber;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String idNumber) {
+        this.idNumber = idNumber;
     }
 
     public Auction getAuction() {

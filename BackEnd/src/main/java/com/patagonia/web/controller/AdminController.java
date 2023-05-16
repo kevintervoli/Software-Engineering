@@ -14,6 +14,7 @@ import org.apache.poi.ss.formula.functions.T;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -62,6 +63,11 @@ public class AdminController {
                                        @RequestHeader("Authorization") String tokenHeader){
         String token = tokenHeader.replace("Bearer ", "");
         return authenticateService.editUser(request, token);
+    }
+
+    @PostMapping("/getAllRoles")
+    public ResponseWrapper<List<Role>> getAllRoles(@RequestBody(required = false) Filters filters) {
+        return authenticateService.getRoles();
     }
 
     @PostMapping("/getAllLogs")
