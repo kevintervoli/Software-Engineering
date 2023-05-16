@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
     <title>Admin Dashboard</title>
 </head>
 
@@ -13,7 +16,7 @@
     <div class="container" id="top">
         <aside class="sidebar-wrapper">
             <div class="sidebar-header">
-                <img src="img/logo-icon.png" alt="Logo">
+                <img src="../assets/images/logo-icon.png" alt="Logo">
                 <h4>rocker</h4>
                 <div class="close-menu">
                     <i class="fas fa-chevron-left"></i>
@@ -22,24 +25,16 @@
             <nav>
                 <ul>
                     <li><a href="#">
-                            <i class="fas fa-home"></i>
-                            <div class="title">dashboard</div>
-                        </a></li>
-                    <li><a href="#">
                             <i class="fas fa-users"></i>
                             <div class="title">customers</div>
                         </a></li>
                     <li><a href="#">
                             <i class="fas fa-tasks"></i>
-                            <div class="title">projects</div>
-                        </a></li>
-                    <li><a href="#">
-                            <i class="fas fa-shopping-bag"></i>
-                            <div class="title">orders</div>
+                            <div class="title">Properties</div>
                         </a></li>
                     <li><a href="#">
                             <i class="far fa-user-circle"></i>
-                            <div class="title">accounts</div>
+                            <div class="title">Agents</div>
                         </a></li>
                     <li><a href="#">
                             <i class="far fa-question-circle"></i>
@@ -72,19 +67,15 @@
                                 327
                             </div>
                         </div>
-                        <img src="img/avatar-2.png" alt="avatar">
+                        <img src="../assets/images/avatar-2.png" alt="avatar">
                     </div>
                 </div>
             </header>
             <section class="main">
                 <div class="box box-1">
                     <div class="box-left">
-                        <h4>congratulations pauline!</h4>
+                        <h4>Congratulations <?php echo $_SESSION['username']; ?>!</h4>
                         <p>You have done 72% more sales today. Check your new badge in your profile.</p>
-                        <a href="#">view badges</a>
-                    </div>
-                    <div class="box-right">
-                        <img src="img/profile.png" alt="profile">
                     </div>
                 </div>
                 <div class="box box-2">
@@ -429,7 +420,7 @@
     <a href="#top" class="scroll-top">
         <i class="fas fa-arrow-up"></i>
     </a>
-    <script src="js/main.js"></script>
+    <script src="./assets/js/admin.js"></script>
     <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
 </body>
 
