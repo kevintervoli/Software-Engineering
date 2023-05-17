@@ -2,9 +2,9 @@
 // check if user is logged in by checking if session variable is set
 session_start();
 if (isset($_SESSION['username'])) {
-    if ($_SESSION['Status'] == 0)
+    if ($_SESSION['status'] == "ADMIN")
         header('Location: ../view-php/admin.php');
-    else if ($_SESSION['Status'] == 1 || $_SESSION['Status'] == 2)
+    else
         header('Location: ../view-php/client.php');
 }
 
@@ -74,8 +74,9 @@ error_reporting(0);
                 // Authentication successful
                 session_start();
                 $_SESSION['username'] = $_POST['username'];
+                $_SESSION['status'] = $responseData['content'][0]['status'];
+                $_SESSION['token'] = $responseData['content'][0]['token']; 
                 $token = $responseData['content'][0]['token'];
-                var_dump($token);
                 header("Location: ../view-php/admin.php");
                 exit();
             } else {

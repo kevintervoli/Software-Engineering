@@ -1,6 +1,12 @@
-<?php
-session_start();
-?>
+`<?php
+    if (isset($_SESSION['username'])) {
+        if ($_SESSION['status'] == "ADMIN")
+            header('Location: ../view-php/admin.php');
+        else
+            header('Location: ../view-php/client.php');
+    }
+    error_reporting(0);
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,10 +30,22 @@ session_start();
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">
+                    <li>
+                        <a href="#" id="customers-link" onclick="updateClass()">
                             <i class="fas fa-users"></i>
                             <div class="title">customers</div>
-                        </a></li>
+                        </a>
+                    </li>
+
+                    <script>
+                        function updateClass() {
+                            var link = document.getElementById("customers-link");
+                            link.classList.add("active");
+                            // Redirect to admin2.php
+                            window.location.href = "admin_2.php";
+                        }
+                    </script>
+
                     <li><a href="#">
                             <i class="fas fa-tasks"></i>
                             <div class="title">Properties</div>
@@ -58,15 +76,12 @@ session_start();
                         <input type="text" placeholder="Search...">
                     </div>
                     <div class="header-right">
-                        <div class="star-container">
-                            <div class="star-left">
-                                <i class="far fa-star"></i>
-                                <span>star</span>
-                            </div>
-                            <div class="star-right">
-                                327
-                            </div>
-                        </div>
+                        <li>
+                            <a href="../PHP/logout.php" id="logout-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <div class="title">Logout</div>
+                            </a>
+                        </li>
                         <img src="../assets/images/avatar-2.png" alt="avatar">
                     </div>
                 </div>
@@ -424,4 +439,4 @@ session_start();
     <script src="https://kit.fontawesome.com/9e5ba2e3f5.js" crossorigin="anonymous"></script>
 </body>
 
-</html>
+</html>`
