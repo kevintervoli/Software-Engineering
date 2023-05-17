@@ -1,10 +1,5 @@
 `<?php
-    if (isset($_SESSION['username'])) {
-        if ($_SESSION['status'] == "ADMIN")
-            header('Location: ../view-php/admin.php');
-        else
-            header('Location: ../view-php/client.php');
-    }
+    session_start();
     error_reporting(0);
     ?>
 <!DOCTYPE html>
