@@ -57,5 +57,29 @@ class User
     }
 }
 
+class Alert
+{
+    public static function success($message)
+    {
+        return "<p class='alert alert-success'>{$message}</p>";
+    }
+
+    public static function warning($message)
+    {
+        return "<p class='alert alert-warning'>{$message}</p>";
+    }
+}
+
+try {
+    $uid = $_GET['id'];
+    $user = new User($uid);
+    $user->loadUser();
+    $user->deleteImage();
+    $user->deleteUser();
+    $msg = Alert::success("Agent Deleted");
+} catch (Exception $e) {
+    $msg = Alert::warning($e->getMessage());
+}
+
 header("Location:useragent.php?msg=$msg");
 ?>
