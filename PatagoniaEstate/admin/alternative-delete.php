@@ -1,11 +1,21 @@
 <?php
 
-class Config
+class Database
 {
-    public static function getDbConnection()
+    private $con;
+
+    public function __construct($config)
     {
-        include("config.php");
-        return $con;
+        $this->con = new mysqli($config['hostname'], $config['username'], $config['password'], $config['database']);
+
+        if ($this->con->connect_error) {
+            throw new Exception("Failed to connect to MySQL: " . $this->con->connect_error);
+        }
+    }
+
+    public function getConnection()
+    {
+        return $this->con;
     }
 }
 
@@ -13,15 +23,17 @@ class User
 {
     private $id;
     private $image;
+    private $db;
 
-    public function __construct($id)
+    public function __construct($id, Database $db)
     {
         $this->id = $id;
+        $this->db = $db;
     }
 
     public function loadUser()
     {
-        $con = Config::getDbConnection();
+        $con = $this->db->getConnection();
         $stmt = $con->prepare("SELECT * FROM user WHERE uid = ?");
         $stmt->bind_param("i", $this->id);
         $stmt->execute();
@@ -46,7 +58,7 @@ class User
 
     public function deleteUser()
     {
-        $con = Config::getDbConnection();
+        $con = $this->db->getConnection();
         $stmt = $con->prepare("DELETE FROM user WHERE uid = ?");
         $stmt->bind_param("i", $this->id);
         $result = $stmt->execute();
@@ -71,8 +83,10 @@ class Alert
 }
 
 try {
+    $config = include("config.php");
+    $database = new Database($config);
     $uid = $_GET['id'];
-    $user = new User($uid);
+    $user = new User($uid, $database);
     $user->loadUser();
     $user->deleteImage();
     $user->deleteUser();
