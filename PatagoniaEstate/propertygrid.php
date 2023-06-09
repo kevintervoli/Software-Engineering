@@ -91,7 +91,6 @@ include("config.php");
 				
 					<div class="col-lg-8">
                         <div class="row">
-						
 							<?php 
 							
 							if(isset($_REQUEST['filter']))

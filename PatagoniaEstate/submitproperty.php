@@ -232,18 +232,18 @@ if(isset($_POST['add']))
 											</div>   
 											<div class="col-xl-6">
 												<div class="form-group row mb-3">
-													<label class="col-lg-3 col-form-label">BHK</label>
+													<label class="col-lg-3 col-form-label">*100000</label>
 													<div class="col-lg-9">
 														<select class="form-control" required name="bhk">
-															<option value="">Select BHK</option>
-															<option value="1 BHK">1 BHK</option>
-															<option value="2 BHK">2 BHK</option>
-															<option value="3 BHK">3 BHK</option>
-															<option value="4 BHK">4 BHK</option>
-															<option value="5 BHK">5 BHK</option>
-															<option value="1,2 BHK">1,2 BHK</option>
-															<option value="2,3 BHK">2,3 BHK</option>
-															<option value="2,3,4 BHK">2,3,4 BHK</option>
+															<option value="">Select</option>
+															<option value="1 ">1</option>
+															<option value="2 ">2</option>
+															<option value="3 ">3 </option>
+															<option value="4 ">4 </option>
+															<option value="5 ">5 </option>
+															<option value="1,2 ">1,2 </option>
+															<option value="2,3 ">2,3 </option>
+															<option value="2,3,4 ">2,3,4 </option>
 														</select>
 													</div>
 												</div>

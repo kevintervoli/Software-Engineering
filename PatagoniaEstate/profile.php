@@ -171,7 +171,7 @@ if(isset($_POST['insert']))
             </div>
         </div>
 	<!--	Submit property   -->
-      <!-- FOR MORE PROJECTS visit: codeastro.com -->  
+ 
         
         <!--	Footer   start-->
 		<?php include("include/footer.php");?>

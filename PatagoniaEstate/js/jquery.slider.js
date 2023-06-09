@@ -1,23 +1,4 @@
-/**
- * jquery.slider - Slider ui control in jQuery
- * 
- * Written by
- * Egor Khmelev (hmelyoff@gmail.com)
- *
- * Licensed under the MIT (MIT-LICENSE.txt).
- *
- * @author Egor Khmelev
- * @version 1.1.0-RELEASE ($Id$)
- * 
- * Dependencies
- * 
- * jQuery (http://jquery.com)
- * jquery.numberformatter (http://code.google.com/p/jquery-numberformatter/)
- * tmpl (http://ejohn.org/blog/javascript-micro-templating/)
- * jquery.dependClass
- * draggable
- * 
- **/
+
 
 (function( $ ) {
   
